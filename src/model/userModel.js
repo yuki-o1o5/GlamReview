@@ -1,2 +1,9 @@
-const { mongoConnect } = require("../service/mongodb");
-const db = mongoConnect();
+const mongoose = require("mongoose");
+
+const UserSchema = new mongoose.Schema({
+  userName: String,
+  email: String,
+  password: String,
+});
+
+module.exports = mongoose.model("User", UserSchema);

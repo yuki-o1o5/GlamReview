@@ -1,37 +1,20 @@
-const { MongoClient } = require("mongodb");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-const URL = process.env.MONGO_URL,
-  dbName = process.env.MONGO_DB_NAME;
+const UserController = require("../controller/userController");
+const ReviewController = require("../controller/reviewController");
+const CommentController = require("../controller/commentController");
 
-const mongoConnect = async () => {
-  const dbo = await MongoClient.connect(URL);
+const URL = process.env.MONGO_URL;
 
-  // check if db exists
-  const dbList = await dbo.db().admin().listDatabases();
-  console.log(dbList);
-  const dbExists = dbList.databases.find((db) => db.name === dbName);
-  if (!dbExists) {
-    const reviews = [
-      {
-        productId: 1,
-        user: "yuki",
-        review: "hello",
-      },
-      {
-        productId: 2,
-        user: "max",
-        review: "bye",
-      },
-      {
-        productId: 1,
-        user: "alex",
-        review: "how r you",
-      },
-    ];
-    await dbo.db(dbName).collection("reviews").insertMany(reviews);
-  }
-  console.log("connected", dbName);
-  return dbo.db(dbName);
-};
+mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
-module.exports = { mongoConnect };
+const db = mongoose.connection;
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("connected to database"));
+
+const userController = new UserController();
+const reviewController = new ReviewController();
+const commentController = new CommentController();
+
+module.exports = { userController, reviewController, commentController };

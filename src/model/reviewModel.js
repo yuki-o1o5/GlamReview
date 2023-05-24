@@ -1,2 +1,9 @@
-const { mongoConnect } = require("../service/mongodb");
-const db = mongoConnect();
+const mongoose = require("mongoose");
+
+const ReviewSchema = new mongoose.Schema({
+  productId: Number,
+  user: String,
+  review: String,
+});
+
+module.exports = mongoose.model("Review", ReviewSchema);
