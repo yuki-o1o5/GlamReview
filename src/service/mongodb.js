@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 
 const UserController = require("../controller/userController");
 const ReviewController = require("../controller/reviewController");
-const CommentController = require("../controller/commentController");
 
 const URL = process.env.MONGO_URL;
 
@@ -15,6 +14,5 @@ db.once("open", () => console.log("connected to database"));
 
 const userController = new UserController();
 const reviewController = new ReviewController();
-const commentController = new CommentController();
 
-module.exports = { userController, reviewController, commentController };
+module.exports = { userController, reviewController };
