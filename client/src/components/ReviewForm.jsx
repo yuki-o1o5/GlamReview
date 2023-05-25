@@ -1,26 +1,40 @@
 import { Box, Button, FormControl, OutlinedInput } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import PropTypes from "prop-types";
+import { UserContext } from "../App";
 
-export const ReviewForm = () => {
-  const userName = "yuki";
+export const ReviewForm = ({ productId, fetchAllReviews }) => {
+  const { user } = useContext(UserContext);
   const [review, setReview] = useState("");
 
   const handleReview = (event) => {
     setReview(event.target.value);
   };
 
-  const onSubmit = (event) => {
+  const handleCreateReview = async (event) => {
     event.preventDefault();
-    // post methods
+    const response = await fetch("/api/reviews", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user, review, productId }),
+    });
 
-    console.log("UserName:", userName, "Review:", review);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Success:", data);
+      fetchAllReviews(productId);
+    } else {
+      console.error("Error:", response.statusText);
+    }
+
+    // console.log("UserName:", userName, "Review:", review);
   };
 
   return (
     <>
-      <form action="post" onSubmit={onSubmit}>
+      <form action="post" onSubmit={handleCreateReview}>
         <Box component="div" noValidate autoComplete="off">
-          <div>User:{userName}</div>
+          <div>User: {user ? user : "Guest"}</div>
           <FormControl sx={{ width: "25ch" }}>
             <OutlinedInput
               value={review}
@@ -35,4 +49,9 @@ export const ReviewForm = () => {
       </form>
     </>
   );
+};
+
+ReviewForm.propTypes = {
+  productId: PropTypes.string,
+  fetchAllReviews: PropTypes.func,
 };
