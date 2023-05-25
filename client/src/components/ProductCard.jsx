@@ -34,5 +34,5 @@ ProductCard.propTypes = {
   title: PropTypes.string,
   id: PropTypes.number,
   price: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
 };
