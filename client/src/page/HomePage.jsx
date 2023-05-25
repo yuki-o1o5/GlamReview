@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
+import { UserContext } from "../App";
 
 export const HomePage = () => {
   const [products, setProducts] = useState([]);
+  // const [user, setUser] = useState("");
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetchProductsData();
   }, []);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const res = await fetch("/api/health");
-  //     const data = await res.json();
-  //     setMessage(data.msg);
-  //   } catch (err) {
-  //     console.err(err);
-  //   }
-  // };
 
   const fetchProductsData = async () => {
     try {
@@ -29,9 +22,11 @@ export const HomePage = () => {
       console.err(err);
     }
   };
+
   return (
     <>
       <h2>hello</h2>
+      <h2>{user ? user : "Guest"}</h2>
       {products.map((product, index) => {
         return (
           <ProductCard
