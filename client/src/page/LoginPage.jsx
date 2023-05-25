@@ -1,12 +1,14 @@
 import { Button, InputBase, Paper } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGIN_ERROR, LOGIN_SUCCESSFUL } from "../constants/regex";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { dispatch } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -18,22 +20,19 @@ export const LoginPage = () => {
       body: JSON.stringify({ email, password }),
     });
     if (response.ok) {
-      const { user, token } = await response.json();
+      const user = await response.json();
+      // console.log(user, "userclient");
       if (!user) {
         setMessage(LOGIN_ERROR);
       } else {
+        dispatch({ type: "LOGIN", payload: user.userName });
         setMessage(LOGIN_SUCCESSFUL);
-        localStorage.setItem("token", token);
         setTimeout(() => {
           navigate("/");
         }, 1500);
       }
     }
   };
-
-  
-
-
 
   return (
     <>

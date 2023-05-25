@@ -32,8 +32,6 @@ export const SignupPage = () => {
       setMessage(REGISTER_ERROR);
       return false;
     }
-
-    // handle response here
   };
   return (
     <>
