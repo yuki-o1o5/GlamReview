@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
-import { UserContext } from "../App";
+
+import { Grid } from "@mui/material";
 
 export const HomePage = () => {
   const [products, setProducts] = useState([]);
-  // const [user, setUser] = useState("");
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetchProductsData();
@@ -25,20 +24,28 @@ export const HomePage = () => {
 
   return (
     <>
-      <h2>hello</h2>
-      <h2>{user ? user : "Guest"}</h2>
-      {products.map((product, index) => {
-        return (
-          <ProductCard
-            url={product.image_link}
-            title={product.name}
-            price={product.price}
-            id={product.id}
-            rating={product.rating}
-            key={index}
-          />
-        );
-      })}
+      <div style={{ padding: "50px 50px" }}>
+        <Grid
+          container
+          spacing={{ xs: 1, md: 2 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
+          {products.map((product, index) => {
+            return (
+              <Grid item xs={2} sm={4} md={4} key={index}>
+                <ProductCard
+                  url={product.image_link}
+                  title={product.name}
+                  price={product.price}
+                  id={product.id}
+                  rating={product.rating}
+                  key={index}
+                />{" "}
+              </Grid>
+            );
+          })}
+        </Grid>
+      </div>
     </>
   );
 };
