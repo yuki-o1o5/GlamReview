@@ -1,16 +1,6 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Modal, Typography } from "@mui/material";
+import styled from "styled-components";
 
-import { red } from "@mui/material/colors";
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
@@ -25,7 +15,6 @@ export const ReviewCard = ({
 }) => {
   const { user } = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
-
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
 
@@ -43,56 +32,50 @@ export const ReviewCard = ({
   };
 
   return (
-    <Card sx={{ maxWidth: 500 }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        title={userName}
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {review}
-        </Typography>
-      </CardContent>
-      <CardActions>
+    <ReviewWrapper>
+      <NameContainer>
+        <Avatar
+          sx={{ bgcolor: (theme) => theme.palette.custom.dark }}
+          alt={userName}
+        ></Avatar>
+        <UserName variant="h6" component="div">
+          {userName}
+        </UserName>
+      </NameContainer>
+      <ReviewDescription variant="body2" color="text.secondary">
+        {review}
+      </ReviewDescription>
+      <ButtonContainer>
         {userName === user ? (
-          <Button size="small" color="primary" onClick={handleOpenModal}>
+          <Button size="small" variant="outlined" onClick={handleOpenModal}>
             edit
           </Button>
         ) : (
           ""
         )}
-
         {userName === user ? (
-          <Button size="small" color="primary" onClick={handleRemoveReview}>
+          <Button size="small" variant="outlined" onClick={handleRemoveReview}>
             remove
           </Button>
         ) : (
           ""
         )}
-        {/* <IconButton aria-label="add to favorites">
+      </ButtonContainer>
+      {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton> */}
-      </CardActions>
-      <Modal
-        open={modalOpen}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+
+      <Modal open={modalOpen} onClose={handleCloseModal}>
         <Box
           sx={{
+            width: "450px",
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             bgcolor: "background.paper",
-            border: "2px solid #000",
             boxShadow: 24,
-            p: 4,
+            p: 7,
           }}
         >
           <EditReviewForm
@@ -104,7 +87,7 @@ export const ReviewCard = ({
           />
         </Box>
       </Modal>
-    </Card>
+    </ReviewWrapper>
   );
 };
 
@@ -115,3 +98,28 @@ ReviewCard.propTypes = {
   productId: PropTypes.string,
   fetchAllReviews: PropTypes.func,
 };
+
+const ReviewWrapper = styled.div`
+  width: 70%;
+  margin-bottom: 60px;
+  border-bottom: 1px solid ${(props) => props.theme.palette.custom.light};
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+`;
+
+const UserName = styled(Typography)`
+  margin-left: 20px;
+`;
+
+const ReviewDescription = styled(Typography)`
+  margin: 40px 0;
+`;
+
+const ButtonContainer = styled.div`
+  margin: 30px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+`;

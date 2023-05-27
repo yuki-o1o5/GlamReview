@@ -1,4 +1,5 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import styled from "styled-components";
 import { UserContext } from "../App";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,13 +29,17 @@ export const Header = () => {
           >
             Cosme Review
           </Typography>
-          <div>{user ? user : "Guest"}</div>
+          <LoginName>{user ? user : "Guest"}</LoginName>
           {user ? (
-            <Button color="inherit" onClick={handlelogout}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={handlelogout}
+            >
               Logout
             </Button>
           ) : (
-            <Button color="inherit" onClick={handlelogin}>
+            <Button color="secondary" variant="contained" onClick={handlelogin}>
               Login
             </Button>
           )}
@@ -43,3 +48,8 @@ export const Header = () => {
     </Box>
   );
 };
+
+const LoginName = styled.div`
+  margin-right: 50px;
+  color: ${(props) => props.theme.palette.custom.light};
+`;

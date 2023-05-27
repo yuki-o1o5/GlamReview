@@ -1,4 +1,11 @@
-import { Box, Button, FormControl, OutlinedInput } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  OutlinedInput,
+  Typography,
+} from "@mui/material";
+import styled from "styled-components";
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { UserContext } from "../App";
@@ -34,18 +41,24 @@ export const ReviewForm = ({ productId, fetchAllReviews }) => {
     <>
       <form action="post" onSubmit={handleCreateReview}>
         <Box component="div" noValidate autoComplete="off">
-          <div>User: {user ? user : "Guest"}</div>
-          <FormControl sx={{ width: "25ch" }}>
+          <Title gutterBottom variant="h6" component="div">
+            Conmment By <UserName> {user ? user : "Guest"}</UserName>
+          </Title>
+          <StyledFormControl fullWidth>
             <OutlinedInput
               value={review}
-              placeholder="Please enter text"
+              placeholder="Please write your review!"
               onChange={handleReview}
+              multiline
+              rows={10}
             />
-          </FormControl>
+          </StyledFormControl>
         </Box>
-        <Button variant="outlined" type="submit">
-          register
-        </Button>
+        <ButtonContainer>
+          <Button variant="outlined" type="submit">
+            register
+          </Button>
+        </ButtonContainer>
       </form>
     </>
   );
@@ -55,3 +68,31 @@ ReviewForm.propTypes = {
   productId: PropTypes.string,
   fetchAllReviews: PropTypes.func,
 };
+
+const Title = styled(Typography)`
+  margin-bottom: 30px;
+`;
+
+const UserName = styled.span`
+  color: ${(props) => props.theme.palette.secondary.dark};
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledFormControl = styled(FormControl)`
+  .MuiOutlinedInput-root {
+    fieldset {
+      border-color: ${(props) => props.theme.palette.secondary.dark};
+    }
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: ${(props) => props.theme.palette.secondary.dark};
+    }
+    &.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: ${(props) => props.theme.palette.secondary.dark};
+    }
+  }
+`;
