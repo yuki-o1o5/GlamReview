@@ -4,6 +4,7 @@ import { ProductCard } from "../components/ProductCard";
 import { Grid, Typography } from "@mui/material";
 
 import { Hero } from "../components/Hero";
+import Footer from "../components/Footer";
 
 export const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -67,6 +68,7 @@ export const HomePage = () => {
           })}
         </Grid>
       </div>
+      <Footer />
     </>
   );
 };

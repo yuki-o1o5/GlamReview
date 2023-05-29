@@ -40,72 +40,74 @@ export const ProductPage = () => {
   const handleGotoLogin = () => navigate("/login");
 
   return (
-    <PageContainer>
-      <ProductContainer>
-        <ImageContainer>
-          <img src={product.image_link} alt={product.name} />
-        </ImageContainer>
-        <TextsContainer>
-          <Typography gutterBottom variant="h6" component="div">
-            {product.name}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {product.price}
-          </Typography>
-          <ReviewContainer>
-            <ReviewNumber gutterBottom variant="h6" component="div">
-              {product.rating ? `${product.rating}` : `0 review`}
-            </ReviewNumber>
-            <Rating name="read-only" value={product.rating || 0} readOnly />
-          </ReviewContainer>
-          <Typography gutterBottom component="div">
-            {product.description}
-          </Typography>
-          <ButtonContainer>
-            {!user ? (
-              <Button variant="outlined" onClick={handleGotoLogin}>
-                Create
-              </Button>
-            ) : !reviews.find((review) => review.user === user) ? (
-              <Button variant="outlined" onClick={handleOpenModal}>
-                Create
-              </Button>
-            ) : null}
-          </ButtonContainer>
-        </TextsContainer>
-      </ProductContainer>
-      <AllReviewsWrapper>
-        <Modal open={modalOpen} onClose={handleCloseModal}>
-          <Box
-            sx={{
-              width: "450px",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 7,
-            }}
-          >
-            <ReviewForm
+    <>
+      <PageContainer>
+        <ProductContainer>
+          <ImageContainer>
+            <img src={product.image_link} alt={product.name} />
+          </ImageContainer>
+          <TextsContainer>
+            <Typography gutterBottom variant="h6" component="div">
+              {product.name}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              {product.price}
+            </Typography>
+            <ReviewContainer>
+              <ReviewNumber gutterBottom variant="h6" component="div">
+                {product.rating ? `${product.rating}` : `0 review`}
+              </ReviewNumber>
+              <Rating name="read-only" value={product.rating || 0} readOnly />
+            </ReviewContainer>
+            <Typography gutterBottom component="div">
+              {product.description}
+            </Typography>
+            <ButtonContainer>
+              {!user ? (
+                <Button variant="outlined" onClick={handleGotoLogin}>
+                  Create
+                </Button>
+              ) : !reviews.find((review) => review.user === user) ? (
+                <Button variant="outlined" onClick={handleOpenModal}>
+                  Create
+                </Button>
+              ) : null}
+            </ButtonContainer>
+          </TextsContainer>
+        </ProductContainer>
+        <AllReviewsWrapper>
+          <Modal open={modalOpen} onClose={handleCloseModal}>
+            <Box
+              sx={{
+                width: "450px",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                bgcolor: "background.paper",
+                boxShadow: 24,
+                p: 7,
+              }}
+            >
+              <ReviewForm
+                productId={productId}
+                fetchAllReviews={fetchAllReviews}
+              />
+            </Box>
+          </Modal>
+          {reviews.map((item, index) => (
+            <ReviewCard
+              id={item._id}
+              userName={item.user}
+              review={item.review}
+              key={index}
               productId={productId}
               fetchAllReviews={fetchAllReviews}
             />
-          </Box>
-        </Modal>
-        {reviews.map((item, index) => (
-          <ReviewCard
-            id={item._id}
-            userName={item.user}
-            review={item.review}
-            key={index}
-            productId={productId}
-            fetchAllReviews={fetchAllReviews}
-          />
-        ))}
-      </AllReviewsWrapper>
-    </PageContainer>
+          ))}
+        </AllReviewsWrapper>
+      </PageContainer>
+    </>
   );
 };
 
