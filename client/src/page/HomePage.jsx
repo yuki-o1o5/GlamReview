@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+
+import { Hero } from "../components/Hero";
 
 export const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -24,15 +26,34 @@ export const HomePage = () => {
 
   return (
     <>
-      <div style={{ padding: "50px 50px" }}>
+      <Hero />
+      <div
+        style={{
+          padding: "0px 170px 50px",
+        }}
+      >
+        {/* <HeroSection /> */}
+        <Typography
+          gutterBottom
+          variant="subtitle1"
+          component="h1"
+          style={{
+            padding: "50px 0",
+            fontFamily: '"Kdam Thmor Pro", sans-serif',
+            color: "#7F0858",
+          }}
+        >
+          ALL PRODUCTS
+        </Typography>
         <Grid
           container
           spacing={{ xs: 1, md: 2 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          columns={{ xs: 3, sm: 8, md: 12 }}
+          style={{ display: "flex", justifyContent: "center" }}
         >
           {products.map((product, index) => {
             return (
-              <Grid item xs={2} sm={4} md={4} key={index}>
+              <Grid item xs={12} sm={6} md={3} key={index}>
                 <ProductCard
                   url={product.image_link}
                   title={product.name}
