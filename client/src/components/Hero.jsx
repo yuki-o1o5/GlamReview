@@ -20,14 +20,19 @@ export const Hero = () => {
         }}
       >
         <div
-          style={{ width: "35%", fontFamily: '"Kdam Thmor Pro", sans-serif' }}
+          style={{
+            width: "35%",
+            fontFamily: '"Kdam Thmor Pro", sans-serif',
+            color: "#7F0858",
+          }}
         >
-          Welcome to QQQ
+          Welcome to SPARKLESCOOP
         </div>
         <div
           style={{
             fontFamily: '"Kdam Thmor Pro", sans-serif',
             marginTop: "40px",
+            color: "#c597a0",
           }}
         >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad cupiditate
