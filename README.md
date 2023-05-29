@@ -1,4 +1,4 @@
-# Cosme Review App
+# SparkleScoop
 
 ## What is this?
 This application allows users to read, create, edit, and delete reviews for cosmetic products. 
