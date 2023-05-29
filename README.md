@@ -28,15 +28,15 @@ Users can also access detailed information about a variety of products, which ar
 
 ### Prepare the application
 
-1. Clone the repository
+1. Clone the repository  
 `git clone https://github.com/yuki-o1o5/SparkleScoop.git`
 
-2. Navigate to the project directory
+2. Navigate to the project directory  
 `cd SparkleScoop`
 
-3. Install the dependencies:
+3. Install the dependencies  
 `npm install`
 
-4. Run the application
+4. Run the application  
 `npm run dev`
 
