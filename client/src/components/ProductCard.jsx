@@ -25,17 +25,17 @@ export const ProductCard = ({ url, title, id, price, rating }) => {
         <CardContent
           style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
         >
-          <Title gutterBottom variant="h6" component="div">
+          <Title gutterBottom variant="subtitle1" component="h2">
             {title}
           </Title>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="subtitle1" component="h2">
             {price}
           </Typography>
           <ReviewContainer>
-            <ReviewNumber gutterBottom variant="h6" component="div">
+            <ReviewNumber gutterBottom variant="subtitle1" component="h3">
               {rating ? `${rating}` : `0`}
             </ReviewNumber>
-            <Rating name="read-only" value={rating} readOnly />
+            <Rating name="read-only" value={rating} readOnly size="small" />
           </ReviewContainer>
         </CardContent>
       </CardActionArea>

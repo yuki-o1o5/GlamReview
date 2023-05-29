@@ -109,15 +109,16 @@ const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Varela", sans-serif;
 `;
 
 const FormContainer = styled.form`
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.palette.secondary.main};
+  border: 0.5px solid #808896;
   margin-top: 100px;
-  padding: 20px 40px;
+  padding: 40px 60px;
 `;
 
 const LinkTitle = styled.div`
@@ -139,7 +140,7 @@ const StyledInputBase = styled(InputBase)`
 
 const ErrorText = styled.span`
   font-size: 0.9rem;
-  color: #8F2220;
+  color: #8f2220;
 `;
 
 const ButtonContainer = styled.div`

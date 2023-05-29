@@ -74,7 +74,7 @@ const Title = styled(Typography)`
 `;
 
 const UserName = styled.span`
-  color: ${(props) => props.theme.palette.secondary.dark};
+  color: ${(props) => props.theme.palette.custom.main};
 `;
 
 const ButtonContainer = styled.div`

@@ -19,15 +19,15 @@ export const Header = () => {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" elevation={0}>
-        <Toolbar>
+      <StyledAppBar position="static" elevation={0}>
+        <Toolbar style={{ padding: "0 170px" }}>
           <Typography
-            variant="h6"
+            variant="h5"
             component="div"
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1, fontFamily: '"Kdam Thmor Pro", sans-serif' }}
             onClick={handleHome}
           >
-            Cosme Review
+            SPARKLESCOOP
           </Typography>
           <LoginName>{user ? user : "Guest"}</LoginName>
           {user ? (
@@ -44,12 +44,18 @@ export const Header = () => {
             </Button>
           )}
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
     </Box>
   );
 };
 
+const StyledAppBar = styled(AppBar)`
+  background-color: ${(props) => props.theme.palette.secondary.main};
+  color: ${(props) => props.theme.palette.custom.main};
+`;
+
 const LoginName = styled.div`
+  font-family: "Varela", sans-serif;
   margin-right: 50px;
-  color: ${(props) => props.theme.palette.custom.light};
+  font-size: 1.2rem;
 `;

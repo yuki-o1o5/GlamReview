@@ -1,7 +1,7 @@
 import { Box, Button, Modal, Rating, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ReviewForm } from "../components/ReviewForm";
 import { ReviewCard } from "../components/ReviewCard";
 import { UserContext } from "../App";
@@ -13,6 +13,7 @@ export const ProductPage = () => {
   const { user } = useContext(UserContext);
   let { id } = useParams();
   const productId = id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProductsDataById(productId);
@@ -24,7 +25,6 @@ export const ProductPage = () => {
       `http://makeup-api.herokuapp.com/api/v1/products/${productId}.json`
     );
     const data = await res.json();
-    console.log(data, "data");
     setProduct(data);
   };
 
@@ -37,6 +37,7 @@ export const ProductPage = () => {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
+  const handleGotoLogin = () => navigate("/login");
 
   return (
     <PageContainer>
@@ -61,13 +62,15 @@ export const ProductPage = () => {
             {product.description}
           </Typography>
           <ButtonContainer>
-            {user && !reviews.find((item) => item.user === user) ? (
+            {!user ? (
+              <Button variant="outlined" onClick={handleGotoLogin}>
+                Create
+              </Button>
+            ) : !reviews.find((review) => review.user === user) ? (
               <Button variant="outlined" onClick={handleOpenModal}>
                 Create
               </Button>
-            ) : (
-              ""
-            )}
+            ) : null}
           </ButtonContainer>
         </TextsContainer>
       </ProductContainer>
@@ -107,13 +110,15 @@ export const ProductPage = () => {
 };
 
 const PageContainer = styled.div`
-  padding: 10px 120px;
+  padding: 10px 170px;
 `;
 
 const ProductContainer = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   margin: 50px 0 50px;
+  gap: 30px;
 `;
 
 const ImageContainer = styled.div`
@@ -121,6 +126,7 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 40%;
+  background-color: #fff;
 `;
 
 const TextsContainer = styled.div`
@@ -143,7 +149,7 @@ const AllReviewsWrapper = styled.div`
   padding: 10px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const ButtonContainer = styled.div`

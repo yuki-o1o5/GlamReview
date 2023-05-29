@@ -35,14 +35,22 @@ export const ReviewCard = ({
     <ReviewWrapper>
       <NameContainer>
         <Avatar
-          sx={{ bgcolor: (theme) => theme.palette.custom.dark }}
+          sx={{
+            bgcolor: (theme) => theme.palette.custom.dark,
+            width: 30,
+            height: 30,
+          }}
           alt={userName}
         ></Avatar>
-        <UserName variant="h6" component="div">
+        <UserName variant="subtitle1" component="h2">
           {userName}
         </UserName>
       </NameContainer>
-      <ReviewDescription variant="body2" color="text.secondary">
+      <ReviewDescription
+        variant="subtitle1"
+        component="h2"
+        color="text.secondary"
+      >
         {review}
       </ReviewDescription>
       <ButtonContainer>
@@ -107,18 +115,19 @@ const ReviewWrapper = styled.div`
 
 const NameContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const UserName = styled(Typography)`
-  margin-left: 20px;
+  margin-left: 15px;
 `;
 
 const ReviewDescription = styled(Typography)`
-  margin: 40px 0;
+  margin: 30px 0 15px;
 `;
 
 const ButtonContainer = styled.div`
-  margin: 30px;
+  margin: 15px 0 30px;
   display: flex;
   gap: 10px;
   justify-content: flex-end;
