@@ -1,34 +1,42 @@
-# Cosme Review App
+# SparkleScoop
 
 ## What is this?
+This application allows users to read, create, edit, and delete reviews for cosmetic products. 
+Users can also access detailed information about a variety of products, which are fetched from an open-source API.
 
-## Stacks
+## Tech Stacks
 
-- React 18.2.0
-- Material UI 5.11.14
+- React
+- Material-UI (MUI)
+- Styled-components
+- Node.js
 - Express
-- Mongo DB
+- Mongoose
+- MongoDB
 
 ## 3rd Party Service
 
 - [MAKEUP API](https://makeup-api.herokuapp.com/)
-  - It's a api that you can use without API authentication.
 
 ## Features
 
-- Cosme List
-  - Shows cosme.
-- Cosme Detail
-  - You can find cosme details.
-- Create Review
-  - You can easiy write, edit and remove review.
+- Users can view a list of cosmetic products.  
+- Users can view detailed information of a product.  
+- Users can read, create, edit, and delete reviews for a product.  
+- Reviews are tied to user accounts.  
+- User authentication and routing.  
 
 ### Prepare the application
 
-1. Clone the repository
+1. Clone the repository  
+`git clone https://github.com/yuki-o1o5/SparkleScoop.git`
 
-2. Install dependencies
+2. Navigate to the project directory  
+`cd SparkleScoop`
 
-3. Run the application
+3. Install the dependencies  
+`npm install`
 
-## Struggles
+4. Run the application  
+`npm run dev`
+
