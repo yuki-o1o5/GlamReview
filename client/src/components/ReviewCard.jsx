@@ -1,15 +1,17 @@
-import { Avatar, Box, Button, Modal, Typography } from "@mui/material";
-import styled from "styled-components";
-
 import PropTypes from "prop-types";
+import { Box, Button, Modal, Rating, Typography } from "@mui/material";
+import styled from "styled-components";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import { EditReviewForm } from "./EditReviewForm";
+import { ReviewForm } from "./ReviewForm";
 
 export const ReviewCard = ({
   id,
   userName,
+  title,
   review,
+  score,
+  date,
   productId,
   fetchAllReviews,
 }) => {
@@ -32,47 +34,38 @@ export const ReviewCard = ({
   };
 
   return (
-    <ReviewWrapper>
-      <NameContainer>
-        <Avatar
-          sx={{
-            bgcolor: (theme) => theme.palette.custom.dark,
-            width: 30,
-            height: 30,
-          }}
-          alt={userName}
-        ></Avatar>
-        <UserName variant="subtitle1" component="h2">
-          {userName}
-        </UserName>
-      </NameContainer>
-      <ReviewDescription
-        variant="subtitle1"
-        component="h2"
-        color="text.secondary"
-      >
-        {review}
-      </ReviewDescription>
-      <ButtonContainer>
-        {userName === user ? (
-          <Button size="small" variant="outlined" onClick={handleOpenModal}>
-            edit
-          </Button>
-        ) : (
-          ""
-        )}
-        {userName === user ? (
-          <Button size="small" variant="outlined" onClick={handleRemoveReview}>
-            remove
-          </Button>
-        ) : (
-          ""
-        )}
-      </ButtonContainer>
-      {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton> */}
-
+    <ReviewCardWrapper>
+      <SubWrapper>
+        <Title>{title}</Title>
+        <Rating name="read-only" value={score} readOnly />
+      </SubWrapper>
+      <Description color="text.secondary">{review}</Description>
+      <CardBottomWrapper>
+        <SubWrapper>
+          <UserName color="text.secondary">by {userName}</UserName>
+          <Date color="text.secondary">{date}</Date>
+        </SubWrapper>
+        <ButtonContainer>
+          {userName === user ? (
+            <Button size="small" variant="outlined" onClick={handleOpenModal}>
+              edit
+            </Button>
+          ) : (
+            ""
+          )}
+          {userName === user ? (
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={handleRemoveReview}
+            >
+              remove
+            </Button>
+          ) : (
+            ""
+          )}
+        </ButtonContainer>
+      </CardBottomWrapper>
       <Modal open={modalOpen} onClose={handleCloseModal}>
         <Box
           sx={{
@@ -86,49 +79,80 @@ export const ReviewCard = ({
             p: 7,
           }}
         >
-          <EditReviewForm
+          {/* <EditReviewForm
             reviewId={id}
             name={userName}
             originalReview={review}
             productId={productId}
             fetchAllReviews={fetchAllReviews}
+          /> */}
+          <ReviewForm
+            productId={productId}
+            fetchAllReviews={fetchAllReviews}
+            editMode={true}
+            reviewId={id}
+            name={userName}
+            originalReview={{ title, review, score, date }}
           />
         </Box>
       </Modal>
-    </ReviewWrapper>
+    </ReviewCardWrapper>
   );
 };
 
 ReviewCard.propTypes = {
   id: PropTypes.string,
   userName: PropTypes.string,
+  title: PropTypes.string,
   review: PropTypes.string,
+  score: PropTypes.number,
+  date: PropTypes.string,
   productId: PropTypes.string,
   fetchAllReviews: PropTypes.func,
 };
 
-const ReviewWrapper = styled.div`
+const ReviewCardWrapper = styled.div`
   width: 70%;
   margin-bottom: 60px;
   border-bottom: 1px solid ${(props) => props.theme.palette.custom.light};
 `;
 
-const NameContainer = styled.div`
+const SubWrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+`;
+
+const Title = styled(Typography)`
+  font-size: 1.2rem;
+`;
+
+const Description = styled(Typography)`
+  margin-top: 0.5rem;
+  width: 100%;
 `;
 
 const UserName = styled(Typography)`
-  margin-left: 15px;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
 `;
 
-const ReviewDescription = styled(Typography)`
-  margin: 30px 0 15px;
+const Date = styled(Typography)`
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+`;
+
+const CardBottomWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
 `;
 
 const ButtonContainer = styled.div`
-  margin: 15px 0 30px;
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+  align-items: center;
 `;

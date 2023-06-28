@@ -31,9 +31,9 @@ export const ProductPage = () => {
   const fetchAllReviews = async (productId) => {
     const res = await fetch(`/api/reviews/${productId}`);
     const data = await res.json();
-
     setReviews(data);
   };
+  console.log(reviews, "reviews");
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
@@ -65,11 +65,11 @@ export const ProductPage = () => {
             <ButtonContainer>
               {!user ? (
                 <Button variant="outlined" onClick={handleGotoLogin}>
-                  Create
+                  Create Review
                 </Button>
               ) : !reviews.find((review) => review.user === user) ? (
                 <Button variant="outlined" onClick={handleOpenModal}>
-                  Create
+                  Create Review
                 </Button>
               ) : null}
             </ButtonContainer>
@@ -77,29 +77,21 @@ export const ProductPage = () => {
         </ProductContainer>
         <AllReviewsWrapper>
           <Modal open={modalOpen} onClose={handleCloseModal}>
-            <Box
-              sx={{
-                width: "450px",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                bgcolor: "background.paper",
-                boxShadow: 24,
-                p: 7,
-              }}
-            >
+            <StyledBox>
               <ReviewForm
                 productId={productId}
                 fetchAllReviews={fetchAllReviews}
               />
-            </Box>
+            </StyledBox>
           </Modal>
           {reviews.map((item, index) => (
             <ReviewCard
               id={item._id}
               userName={item.user}
+              title={item.title}
               review={item.review}
+              score={item.score}
+              date={item.date}
               key={index}
               productId={productId}
               fetchAllReviews={fetchAllReviews}
@@ -158,4 +150,14 @@ const ButtonContainer = styled.div`
   margin-top: 30px;
   display: flex;
   justify-content: flex-end;
+`;
+
+const StyledBox = styled(Box)`
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px;
 `;
