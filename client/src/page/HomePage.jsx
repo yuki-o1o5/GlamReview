@@ -1,27 +1,74 @@
 import { useEffect, useState } from "react";
-import { ProductCard } from "../components/ProductCard";
-
-import { Grid, Typography } from "@mui/material";
-
+import { Box, Tab, Typography } from "@mui/material";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Hero } from "../components/Hero";
 import Footer from "../components/Footer";
+import ProductsContainer from "../components/ProductsContainer";
+import { fetchProductsByBrandName } from "../constants/fetchApi";
 
 export const HomePage = () => {
-  const [products, setProducts] = useState([]);
+  const [cliniqueProducts, setCliniqueProducts] = useState([]);
+  const [covergirlProducts, setCovergirlProducts] = useState([]);
+  const [lorealProducts, setLorealProducts] = useState([]);
+  const [maybellineProducts, setMaybellineProducts] = useState([]);
+  const [revlonProducts, setRevlonProducts] = useState([]);
+
+  const [value, setValue] = useState("1");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
-    fetchProductsData();
+    getCliniqueProducts();
+    getCovergirlProducts();
+    getLorealProducts();
+    getMaybellineProducts();
+    getRevlonProducts();
   }, []);
 
-  const fetchProductsData = async () => {
+  const getCliniqueProducts = async () => {
     try {
-      const res = await fetch(
-        "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline"
-      );
-      const data = await res.json();
-      setProducts(data);
+      const products = await fetchProductsByBrandName("clinique");
+      setCliniqueProducts(products);
     } catch (err) {
-      console.err(err);
+      console.error(err);
+    }
+  };
+
+  const getCovergirlProducts = async () => {
+    try {
+      const products = await fetchProductsByBrandName("covergirl");
+      setCovergirlProducts(products);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getLorealProducts = async () => {
+    try {
+      const products = await fetchProductsByBrandName("l'oreal");
+      setLorealProducts(products);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getMaybellineProducts = async () => {
+    try {
+      const products = await fetchProductsByBrandName("maybelline");
+      setMaybellineProducts(products);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getRevlonProducts = async () => {
+    try {
+      const products = await fetchProductsByBrandName("revlon");
+      setRevlonProducts(products);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -33,7 +80,6 @@ export const HomePage = () => {
           padding: "0px 170px 50px",
         }}
       >
-        {/* <HeroSection /> */}
         <Typography
           gutterBottom
           variant="subtitle1"
@@ -46,27 +92,37 @@ export const HomePage = () => {
         >
           ALL PRODUCTS
         </Typography>
-        <Grid
-          container
-          spacing={{ xs: 1, md: 2 }}
-          columns={{ xs: 3, sm: 8, md: 12 }}
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          {products.map((product, index) => {
-            return (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <ProductCard
-                  url={product.image_link}
-                  title={product.name}
-                  price={product.price}
-                  id={product.id}
-                  rating={product.rating}
-                  key={index}
-                />{" "}
-              </Grid>
-            );
-          })}
-        </Grid>
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="clinique" value="1" />
+                <Tab label="covergirl" value="2" />
+                <Tab label="l'oreal" value="3" />
+                <Tab label="maybelline" value="4" />
+                <Tab label="revlon" value="5" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              <ProductsContainer products={cliniqueProducts} />
+            </TabPanel>
+            <TabPanel value="2">
+              <ProductsContainer products={covergirlProducts} />
+            </TabPanel>
+            <TabPanel value="3">
+              <ProductsContainer products={lorealProducts} />
+            </TabPanel>
+            <TabPanel value="4">
+              <ProductsContainer products={maybellineProducts} />
+            </TabPanel>
+            <TabPanel value="5">
+              <ProductsContainer products={revlonProducts} />
+            </TabPanel>
+          </TabContext>
+        </Box>
       </div>
       <Footer />
     </>
