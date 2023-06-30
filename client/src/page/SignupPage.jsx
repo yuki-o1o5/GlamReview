@@ -4,14 +4,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
-  REGISTER_ERROR,
-  REGISTER_SUCCESSFUL,
-  emailRegex,
-  errEmail,
-  errPassword,
-  errUserName,
-  passwordRegex,
-} from "../constants/regex";
+  ERROR_EMAIL,
+  ERROR_PASSWORD,
+  ERROR_REGISTER,
+  ERROR_USER_NAME,
+  SUCCESSFUL_REGISTER,
+} from "../constants/message";
+import { emailRegex, passwordRegex } from "../utils/regexUtils";
 
 export const SignupPage = () => {
   const [message, setMessage] = useState("");
@@ -38,13 +37,13 @@ export const SignupPage = () => {
     });
 
     if (response.ok) {
-      setMessage(REGISTER_SUCCESSFUL);
+      setMessage(SUCCESSFUL_REGISTER);
       setTimeout(() => {
         navigate("/login");
       }, 1500);
       return true;
     } else {
-      setMessage(REGISTER_ERROR);
+      setMessage(ERROR_REGISTER);
       return false;
     }
   };
@@ -76,7 +75,7 @@ export const SignupPage = () => {
               })}
             />
           </Paper>
-          {errors.userName && <ErrorText>{errUserName}</ErrorText>}
+          {errors.userName && <ErrorText>{ERROR_USER_NAME}</ErrorText>}
         </InputAndErrorContainer>
         <InputAndErrorContainer>
           <Paper
@@ -97,7 +96,7 @@ export const SignupPage = () => {
               })}
             />
           </Paper>
-          {errors.email && <ErrorText>{errEmail}</ErrorText>}
+          {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
         <InputAndErrorContainer>
           <Paper
@@ -118,7 +117,7 @@ export const SignupPage = () => {
               })}
             />
           </Paper>
-          {errors.password && <ErrorText>{errPassword}</ErrorText>}
+          {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         </InputAndErrorContainer>
         <ButtonContainer>
           <Button variant="outlined" type="submit">

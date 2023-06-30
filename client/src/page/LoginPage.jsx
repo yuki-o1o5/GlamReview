@@ -2,16 +2,15 @@ import { Button, InputBase, Paper, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useState } from "react";
 import {
-  LOGIN_ERROR,
-  LOGIN_SUCCESSFUL,
-  emailRegex,
-  errEmail,
-  errPassword,
-  passwordRegex,
-} from "../constants/regex";
+  ERROR_EMAIL,
+  ERROR_LOGIN,
+  ERROR_PASSWORD,
+  SUCCESSFUL_LOGIN,
+} from "../constants/message";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../App";
+import { emailRegex, passwordRegex } from "../utils/regexUtils";
 
 export const LoginPage = () => {
   const [message, setMessage] = useState("");
@@ -34,10 +33,10 @@ export const LoginPage = () => {
     if (response.ok) {
       const user = await response.json();
       if (!user) {
-        setMessage(LOGIN_ERROR);
+        setMessage(ERROR_LOGIN);
       } else {
         dispatch({ type: "LOGIN", payload: user.userName });
-        setMessage(LOGIN_SUCCESSFUL);
+        setMessage(SUCCESSFUL_LOGIN);
         setTimeout(() => {
           navigate("/");
         }, 1500);
@@ -74,7 +73,7 @@ export const LoginPage = () => {
               })}
             />
           </Paper>
-          {errors.email && <ErrorText>{errEmail}</ErrorText>}
+          {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
         <Paper
           component="div"
@@ -92,7 +91,7 @@ export const LoginPage = () => {
             })}
           />
         </Paper>
-        {errors.password && <ErrorText>{errPassword}</ErrorText>}
+        {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         <ButtonContainer>
           <Button variant="outlined" type="submit">
             login
