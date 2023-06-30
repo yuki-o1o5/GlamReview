@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Rating, Typography } from "@mui/material";
+import { Button, Modal, Rating, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -33,7 +33,9 @@ export const ProductPage = () => {
     const data = await res.json();
     setReviews(data);
   };
-  console.log(reviews, "reviews");
+
+  const average =
+    reviews.reduce((accum, curr) => accum + curr.score, 0) / reviews.length;
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
@@ -55,9 +57,9 @@ export const ProductPage = () => {
             </Typography>
             <ReviewContainer>
               <ReviewNumber gutterBottom variant="h6" component="div">
-                {product.rating ? `${product.rating}` : `0 review`}
+                {average ? `${average}` : `0 review`}
               </ReviewNumber>
-              <Rating name="read-only" value={product.rating || 0} readOnly />
+              <Rating name="read-only" value={average || 0} readOnly />
             </ReviewContainer>
             <Typography gutterBottom component="div">
               {product.description}
@@ -77,12 +79,10 @@ export const ProductPage = () => {
         </ProductContainer>
         <AllReviewsWrapper>
           <Modal open={modalOpen} onClose={handleCloseModal}>
-            <StyledBox>
-              <ReviewForm
-                productId={productId}
-                fetchAllReviews={fetchAllReviews}
-              />
-            </StyledBox>
+            <ReviewForm
+              productId={productId}
+              fetchAllReviews={fetchAllReviews}
+            />
           </Modal>
           {reviews.map((item, index) => (
             <ReviewCard
@@ -150,14 +150,4 @@ const ButtonContainer = styled.div`
   margin-top: 30px;
   display: flex;
   justify-content: flex-end;
-`;
-
-const StyledBox = styled(Box)`
-  width: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 30px;
 `;
