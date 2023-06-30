@@ -85,7 +85,7 @@ export const ReviewForm = ({
   };
 
   return (
-    <>
+    <StyledBox>
       <form
         action="post"
         onSubmit={editMode ? handleUpdateReview : handleCreateReview}
@@ -149,7 +149,7 @@ export const ReviewForm = ({
           </Button>
         </ButtonContainer>
       </form>
-    </>
+    </StyledBox>
   );
 };
 
@@ -208,4 +208,14 @@ const FlexContainer = styled.div`
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledBox = styled(Box)`
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px;
 `;

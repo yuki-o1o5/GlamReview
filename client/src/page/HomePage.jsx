@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Box, Tab, Typography } from "@mui/material";
+import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Hero } from "../components/Hero";
 import Footer from "../components/Footer";
 import ProductsContainer from "../components/ProductsContainer";
 import { fetchProductsByBrandName } from "../constants/fetchApi";
+import styled from "styled-components";
 
 export const HomePage = () => {
   const [cliniqueProducts, setCliniqueProducts] = useState([]);
@@ -75,23 +76,10 @@ export const HomePage = () => {
   return (
     <>
       <Hero />
-      <div
-        style={{
-          padding: "0px 170px 50px",
-        }}
-      >
-        <Typography
-          gutterBottom
-          variant="subtitle1"
-          component="h1"
-          style={{
-            padding: "50px 0",
-            fontFamily: '"Kdam Thmor Pro", sans-serif',
-            color: "#7F0858",
-          }}
-        >
+      <Wrapper>
+        <Text gutterBottom variant="subtitle1" component="h1">
           ALL PRODUCTS
-        </Typography>
+        </Text>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -123,8 +111,22 @@ export const HomePage = () => {
             </TabPanel>
           </TabContext>
         </Box>
-      </div>
+      </Wrapper>
       <Footer />
     </>
   );
 };
+
+const Wrapper = styled.section`
+  padding: 0px 170px 50px;
+`;
+
+// const StyledBox = styled(Box)`
+//   border-bottom: 1rem;
+// `;
+
+const Text = styled.section`
+  padding: 50px 0;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  color: #7f0858;
+`;

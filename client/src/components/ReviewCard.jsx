@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Box, Button, Modal, Rating, Typography } from "@mui/material";
+import { Button, Modal, Rating, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
@@ -67,34 +67,14 @@ export const ReviewCard = ({
         </ButtonContainer>
       </CardBottomWrapper>
       <Modal open={modalOpen} onClose={handleCloseModal}>
-        <Box
-          sx={{
-            width: "450px",
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 7,
-          }}
-        >
-          {/* <EditReviewForm
-            reviewId={id}
-            name={userName}
-            originalReview={review}
-            productId={productId}
-            fetchAllReviews={fetchAllReviews}
-          /> */}
-          <ReviewForm
-            productId={productId}
-            fetchAllReviews={fetchAllReviews}
-            editMode={true}
-            reviewId={id}
-            name={userName}
-            originalReview={{ title, review, score, date }}
-          />
-        </Box>
+        <ReviewForm
+          productId={productId}
+          fetchAllReviews={fetchAllReviews}
+          editMode={true}
+          reviewId={id}
+          name={userName}
+          originalReview={{ title, review, score, date }}
+        />
       </Modal>
     </ReviewCardWrapper>
   );
