@@ -19,9 +19,9 @@ export const ProductCard = ({ url, title, id, price, rating }) => {
   return (
     <Card style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <CardActionArea onClick={() => handleClick(id)}>
-        <ImageContainer>
+        <ImageWrapper>
           <img src={url} alt={title} />
-        </ImageContainer>
+        </ImageWrapper>
         <CardContent
           style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
         >
@@ -51,7 +51,7 @@ ProductCard.propTypes = {
   rating: PropTypes.number,
 };
 
-const ImageContainer = styled.div`
+const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
