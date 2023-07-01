@@ -1,8 +1,8 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import styled from "styled-components";
-import { UserContext } from "../App";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 export const Header = () => {
   const { user, dispatch } = useContext(UserContext);

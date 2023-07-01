@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Button, Modal, Rating, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useState } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../contexts/UserContext";
 import { ReviewForm } from "./ReviewForm";
 
 export const ReviewCard = ({

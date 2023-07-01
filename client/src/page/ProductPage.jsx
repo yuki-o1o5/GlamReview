@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReviewForm } from "../components/ReviewForm";
 import { ReviewCard } from "../components/ReviewCard";
-import { UserContext } from "../App";
+import { UserContext } from "../contexts/UserContext";
 
 export const ProductPage = () => {
   const [product, setProduct] = useState({});
@@ -26,6 +26,7 @@ export const ProductPage = () => {
     );
     const data = await res.json();
     setProduct(data);
+    console.log(data);
   };
 
   const fetchAllReviews = async (productId) => {

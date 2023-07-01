@@ -9,7 +9,7 @@ import {
 } from "../constants/message";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { UserContext } from "../App";
+import { UserContext } from "../contexts/UserContext";
 import { emailRegex, passwordRegex } from "../utils/regexUtils";
 
 export const LoginPage = () => {
