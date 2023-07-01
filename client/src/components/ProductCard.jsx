@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export const ProductCard = ({ url, title, id, price, rating }) => {
+export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
 
   const handleClick = (productId) => {
@@ -18,24 +18,29 @@ export const ProductCard = ({ url, title, id, price, rating }) => {
 
   return (
     <Card style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <CardActionArea onClick={() => handleClick(id)}>
+      <CardActionArea onClick={() => handleClick(product.id)}>
         <ImageWrapper>
-          <img src={url} alt={title} />
+          <img src={product.image_link} alt={product.name} />
         </ImageWrapper>
         <CardContent
           style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
         >
           <Title gutterBottom variant="subtitle1" component="h2">
-            {title}
+            {product.name}
           </Title>
           <Typography gutterBottom variant="subtitle1" component="h2">
-            {price}
+            {product.price}
           </Typography>
           <ReviewContainer>
             <ReviewNumber gutterBottom variant="subtitle1" component="h3">
-              {rating ? `${rating}` : `0`}
+              {product.rating ? `${product.rating}` : `0`}
             </ReviewNumber>
-            <Rating name="read-only" value={rating} readOnly size="small" />
+            <Rating
+              name="read-only"
+              value={product.rating}
+              readOnly
+              size="small"
+            />
           </ReviewContainer>
         </CardContent>
       </CardActionArea>
@@ -44,11 +49,13 @@ export const ProductCard = ({ url, title, id, price, rating }) => {
 };
 
 ProductCard.propTypes = {
-  url: PropTypes.string,
-  title: PropTypes.string,
-  id: PropTypes.number,
-  price: PropTypes.string,
-  rating: PropTypes.number,
+  product: {
+    id: PropTypes.number,
+    image_link: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    rating: PropTypes.number,
+  },
 };
 
 const ImageWrapper = styled.div`

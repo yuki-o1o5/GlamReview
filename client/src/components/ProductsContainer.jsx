@@ -13,14 +13,7 @@ export default function ProductsContainer({ products }) {
       {products.map((product, index) => {
         return (
           <Grid item xs={12} sm={6} md={3} key={index}>
-            <ProductCard
-              url={product.image_link}
-              title={product.name}
-              price={product.price}
-              id={product.id}
-              rating={product.rating}
-              key={index}
-            />
+            <ProductCard product={product} key={index} />
           </Grid>
         );
       })}
