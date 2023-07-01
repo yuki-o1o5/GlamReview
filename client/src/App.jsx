@@ -5,29 +5,15 @@ import { Header } from "./components/Header";
 import { ProductPage } from "./page/ProductPage";
 import { LoginPage } from "./page/LoginPage";
 import { SignupPage } from "./page/SignupPage";
-import { createContext, useReducer } from "react";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./constants/colorTheme";
-
-export const UserContext = createContext();
-
-const initialState = {
-  user: null,
-};
-
-function userReducer(state, action) {
-  switch (action.type) {
-    case "LOGIN":
-      return { ...state, user: action.payload };
-    case "LOGOUT":
-      return { ...state, user: null };
-    default:
-      return state;
-  }
-}
+import { useReducer } from "react";
+import { userInitialState, userReducer } from "./reducers/userReducer";
+import { UserContext } from "./contexts/UserContext";
 
 function App() {
-  const [state, dispatch] = useReducer(userReducer, initialState);
+  const [state, dispatch] = useReducer(userReducer, userInitialState);
+
   return (
     <>
       <ThemeProvider theme={theme}>
