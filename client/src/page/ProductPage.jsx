@@ -79,11 +79,16 @@ export const ProductPage = () => {
           </TextsContainer>
         </ProductContainer>
         <AllReviewsWrapper>
-          <Modal open={modalOpen} onClose={handleCloseModal}>
+          <Modal
+            open={modalOpen}
+            onClose={handleCloseModal}
+            disableEnforceFocus
+          >
             <div>
               <ReviewForm
                 productId={productId}
                 fetchAllReviews={fetchAllReviews}
+                editMode={false}
               />
             </div>
           </Modal>

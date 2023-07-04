@@ -45,6 +45,16 @@ export const ReviewCard = ({
           <UserName color="text.secondary">by {userName}</UserName>
           <Date color="text.secondary">{date}</Date>
         </SubWrapper>
+        <Modal open={modalOpen} onClose={handleCloseModal} disableEnforceFocus>
+          <ReviewForm
+            productId={productId}
+            fetchAllReviews={fetchAllReviews}
+            editMode={true}
+            reviewId={id}
+            name={userName}
+            originalReview={{ title, review, score, date }}
+          />
+        </Modal>
         <ButtonContainer>
           {userName === user ? (
             <Button size="small" variant="outlined" onClick={handleOpenModal}>
@@ -66,16 +76,6 @@ export const ReviewCard = ({
           )}
         </ButtonContainer>
       </CardBottomWrapper>
-      <Modal open={modalOpen} onClose={handleCloseModal}>
-        <ReviewForm
-          productId={productId}
-          fetchAllReviews={fetchAllReviews}
-          editMode={true}
-          reviewId={id}
-          name={userName}
-          originalReview={{ title, review, score, date }}
-        />
-      </Modal>
     </ReviewCardWrapper>
   );
 };
