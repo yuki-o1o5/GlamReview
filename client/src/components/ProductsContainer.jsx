@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import { Grid } from "@mui/material";
 import { ProductCard } from "./ProductCard";
+import PropTypes from "prop-types";
 
 export default function ProductsContainer({ products }) {
   return (
@@ -20,3 +20,7 @@ export default function ProductsContainer({ products }) {
     </Grid>
   );
 }
+
+ProductsContainer.propTypes = {
+  products: PropTypes.array,
+};
