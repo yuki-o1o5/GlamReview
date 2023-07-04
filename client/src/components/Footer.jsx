@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export default function Footer() {
   return (
-    <SContainer>
+    <StyledContainer>
       <div> Yuki &copy; 2023, All Rights Reserved </div>
-    </SContainer>
+    </StyledContainer>
   );
 }
 
-const SContainer = styled.div`
+const StyledContainer = styled.div`
   background-color: ${(props) => props.theme.palette.secondary.main};
   color: ${(props) => props.theme.palette.custom.main};
   display: flex;
