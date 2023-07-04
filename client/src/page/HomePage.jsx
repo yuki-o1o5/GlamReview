@@ -8,12 +8,13 @@ import { fetchProductsByBrandName } from "../constants/fetchApi";
 import styled from "styled-components";
 
 export const HomePage = () => {
-  const [cliniqueProducts, setCliniqueProducts] = useState([]);
-  const [covergirlProducts, setCovergirlProducts] = useState([]);
-  const [lorealProducts, setLorealProducts] = useState([]);
-  const [maybellineProducts, setMaybellineProducts] = useState([]);
-  const [revlonProducts, setRevlonProducts] = useState([]);
-
+  const [products, setProducts] = useState({
+    clinique: [],
+    covergirl: [],
+    maybelline: [],
+    milani: [],
+    revlon: [],
+  });
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
@@ -21,53 +22,27 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
-    getCliniqueProducts();
-    getCovergirlProducts();
-    getLorealProducts();
-    getMaybellineProducts();
-    getRevlonProducts();
+    getProducts();
   }, []);
 
-  const getCliniqueProducts = async () => {
+  const getProducts = async () => {
     try {
-      const products = await fetchProductsByBrandName("clinique");
-      setCliniqueProducts(products);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getCovergirlProducts = async () => {
-    try {
-      const products = await fetchProductsByBrandName("covergirl");
-      setCovergirlProducts(products);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getLorealProducts = async () => {
-    try {
-      const products = await fetchProductsByBrandName("l'oreal");
-      setLorealProducts(products);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getMaybellineProducts = async () => {
-    try {
-      const products = await fetchProductsByBrandName("maybelline");
-      setMaybellineProducts(products);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getRevlonProducts = async () => {
-    try {
-      const products = await fetchProductsByBrandName("revlon");
-      setRevlonProducts(products);
+      const brands = [
+        "clinique",
+        "covergirl",
+        "maybelline",
+        "milani",
+        "revlon",
+      ];
+      const brandProductsPromises = brands.map((brand) =>
+        fetchProductsByBrandName(brand)
+      );
+      const brandProductsArray = await Promise.all(brandProductsPromises);
+      const newProducts = brands.reduce((acc, brand, idx) => {
+        acc[brand] = brandProductsArray[idx];
+        return acc;
+      }, {});
+      setProducts(newProducts);
     } catch (err) {
       console.error(err);
     }
@@ -89,25 +64,25 @@ export const HomePage = () => {
               >
                 <Tab label="clinique" value="1" />
                 <Tab label="covergirl" value="2" />
-                <Tab label="l'oreal" value="3" />
-                <Tab label="maybelline" value="4" />
+                <Tab label="maybelline" value="3" />
+                <Tab label="milani" value="4" />
                 <Tab label="revlon" value="5" />
               </TabList>
             </Box>
             <TabPanel value="1">
-              <ProductsContainer products={cliniqueProducts} />
+              <ProductsContainer products={products.clinique} />
             </TabPanel>
             <TabPanel value="2">
-              <ProductsContainer products={covergirlProducts} />
+              <ProductsContainer products={products.covergirl} />
             </TabPanel>
             <TabPanel value="3">
-              <ProductsContainer products={lorealProducts} />
+              <ProductsContainer products={products.maybelline} />
             </TabPanel>
             <TabPanel value="4">
-              <ProductsContainer products={maybellineProducts} />
+              <ProductsContainer products={products.milani} />
             </TabPanel>
             <TabPanel value="5">
-              <ProductsContainer products={revlonProducts} />
+              <ProductsContainer products={products.revlon} />
             </TabPanel>
           </TabContext>
         </Box>
