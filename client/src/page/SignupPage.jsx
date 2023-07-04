@@ -73,6 +73,7 @@ export const SignupPage = () => {
               {...register("userName", {
                 required: true,
               })}
+              autoComplete="off"
             />
           </Paper>
           {errors.userName && <ErrorText>{ERROR_USER_NAME}</ErrorText>}
@@ -94,6 +95,7 @@ export const SignupPage = () => {
                 required: true,
                 pattern: emailRegex,
               })}
+              autoComplete="email"
             />
           </Paper>
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
@@ -115,6 +117,7 @@ export const SignupPage = () => {
                 required: true,
                 pattern: passwordRegex,
               })}
+              autoComplete="off"
             />
           </Paper>
           {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}

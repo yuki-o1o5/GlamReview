@@ -66,11 +66,13 @@ export const LoginPage = () => {
           >
             <StyledInputBase
               placeholder="email"
+              type="email"
               fullWidth
               {...register("email", {
                 required: true,
                 pattern: emailRegex,
               })}
+              autoComplete="email"
             />
           </Paper>
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
@@ -89,6 +91,7 @@ export const LoginPage = () => {
               required: true,
               pattern: passwordRegex,
             })}
+            autoComplete="off"
           />
         </Paper>
         {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
