@@ -17,14 +17,14 @@ class UserController {
   async loginUser(req, res) {
     try {
       const { email, password } = req.body;
-      console.log(email);
+
       const user = await User.findOne({ email });
-      console.log(user, "user");
+
       if (!user) {
         return res.status(400).send({ message: "Invalid email or password" });
       }
       const validPassword = await bcrypt.compare(password, user.password);
-      console.log(password, "pass");
+
       if (!validPassword) {
         return res.status(400).send({ message: "Invalid password" });
       }
