@@ -16,7 +16,6 @@ import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { UserContext } from "../contexts/UserContext";
 
-
 export const ReviewForm = ({
   productId,
   fetchAllReviews,
@@ -44,7 +43,7 @@ export const ReviewForm = ({
     setScore(event.target.value);
   };
 
-  console.log(score, "score");
+
 
   const handleChangeDate = (newValue) => {
     setDate(newValue.toISOString());
@@ -86,71 +85,73 @@ export const ReviewForm = ({
   };
 
   return (
-    <StyledBox>
-      <form
-        action="post"
-        onSubmit={editMode ? handleUpdateReview : handleCreateReview}
-      >
-        <Box component="div" noValidate autoComplete="off">
-          <Headline gutterBottom variant="h6" component="div">
-            Review by <UserName> {user ? user : "Guest"}</UserName>
-          </Headline>
+    <>
+      <StyledBox>
+        <form
+          action="post"
+          onSubmit={editMode ? handleUpdateReview : handleCreateReview}
+        >
+          <Box component="div" noValidate autoComplete="off">
+            <Headline gutterBottom variant="h6" component="div">
+              Review by <UserName> {user ? user : "Guest"}</UserName>
+            </Headline>
 
-          <StyledFormControl fullWidth>
-            <InputTitle>Title</InputTitle>
-            <OutlinedInput
-              value={title}
-              placeholder="Please write your review title!"
-              onChange={handleTitle}
-            />
-          </StyledFormControl>
-          <InputTitle>Review</InputTitle>
-          <StyledFormControl fullWidth>
-            <OutlinedInput
-              value={review}
-              placeholder="Please write your review!"
-              onChange={handleReview}
-              multiline
-              rows={7}
-            />
-          </StyledFormControl>
-          <FlexContainer>
-            <SelectContainer>
-              <InputTitle>Score</InputTitle>
-              <Select
-                value={score}
-                onChange={handleScore}
-                displayEmpty
-                inputProps={{ "aria-label": "Without label" }}
-                fullWidth
-                variant="outlined"
-              >
-                {reviewNumberArray.map((num) => {
-                  return (
-                    <MenuItem value={num} key={num}>
-                      {num}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </SelectContainer>
-            <SelectContainer>
-              <InputSubTitle>Date</InputSubTitle>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker value={date} onChange={handleChangeDate} />
-                </DemoContainer>
-              </LocalizationProvider>
-            </SelectContainer>
-          </FlexContainer>
-        </Box>
-        <ButtonContainer>
-          <Button variant="outlined" type="submit">
-            register
-          </Button>
-        </ButtonContainer>
-      </form>
-    </StyledBox>
+            <StyledFormControl fullWidth>
+              <InputTitle>Title</InputTitle>
+              <OutlinedInput
+                value={title}
+                placeholder="Please write your review title!"
+                onChange={handleTitle}
+              />
+            </StyledFormControl>
+            <InputTitle>Review</InputTitle>
+            <StyledFormControl fullWidth>
+              <OutlinedInput
+                value={review}
+                placeholder="Please write your review!"
+                onChange={handleReview}
+                multiline
+                rows={7}
+              />
+            </StyledFormControl>
+            <FlexContainer>
+              <SelectContainer>
+                <InputTitle>Score</InputTitle>
+                <Select
+                  value={score}
+                  onChange={handleScore}
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                  fullWidth
+                  variant="outlined"
+                >
+                  {reviewNumberArray.map((num) => {
+                    return (
+                      <MenuItem value={num} key={num}>
+                        {num}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </SelectContainer>
+              <SelectContainer>
+                <InputSubTitle>Date</InputSubTitle>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DatePicker value={date} onChange={handleChangeDate} />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </SelectContainer>
+            </FlexContainer>
+          </Box>
+          <ButtonContainer>
+            <Button variant="outlined" type="submit">
+              register
+            </Button>
+          </ButtonContainer>
+        </form>
+      </StyledBox>
+    </>
   );
 };
 

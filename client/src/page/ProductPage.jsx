@@ -80,10 +80,12 @@ export const ProductPage = () => {
         </ProductContainer>
         <AllReviewsWrapper>
           <Modal open={modalOpen} onClose={handleCloseModal}>
-            <ReviewForm
-              productId={productId}
-              fetchAllReviews={fetchAllReviews}
-            />
+            <div>
+              <ReviewForm
+                productId={productId}
+                fetchAllReviews={fetchAllReviews}
+              />
+            </div>
           </Modal>
           {reviews.map((item, index) => (
             <ReviewCard
