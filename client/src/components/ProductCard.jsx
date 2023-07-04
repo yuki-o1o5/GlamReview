@@ -6,11 +6,15 @@ import {
   Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
+
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useProductReviews } from "../hooks/useProductReviews";
 
 export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
+
+  const { averageScore } = useProductReviews(product.id);
 
   const handleClick = (productId) => {
     navigate(`/${productId}`);
@@ -33,11 +37,11 @@ export const ProductCard = ({ product }) => {
           </Typography>
           <ReviewContainer>
             <ReviewNumber gutterBottom variant="subtitle1" component="h3">
-              {product.rating ? `${product.rating}` : `0`}
+              {averageScore ? `${averageScore}` : `0`}
             </ReviewNumber>
             <Rating
               name="read-only"
-              value={product.rating}
+              value={averageScore}
               readOnly
               size="small"
             />
@@ -49,13 +53,13 @@ export const ProductCard = ({ product }) => {
 };
 
 ProductCard.propTypes = {
-  product: {
+  product: PropTypes.shape({
     id: PropTypes.number,
     image_link: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.string,
     rating: PropTypes.number,
-  },
+  }),
 };
 
 const ImageWrapper = styled.div`
