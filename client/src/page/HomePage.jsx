@@ -4,8 +4,9 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Hero } from "../components/Hero";
 import Footer from "../components/Footer";
 import ProductsContainer from "../components/ProductsContainer";
-import { fetchProductsByBrandName } from "../constants/fetchApi";
+import { fetchProductsByBrandName } from "../utils/fetchApiUtils";
 import styled from "styled-components";
+import { brands } from "../constants/brandName";
 
 export const HomePage = () => {
   const [products, setProducts] = useState({
@@ -27,13 +28,6 @@ export const HomePage = () => {
 
   const getProducts = async () => {
     try {
-      const brands = [
-        "clinique",
-        "covergirl",
-        "maybelline",
-        "milani",
-        "revlon",
-      ];
       const brandProductsPromises = brands.map((brand) =>
         fetchProductsByBrandName(brand)
       );
