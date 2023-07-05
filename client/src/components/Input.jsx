@@ -1,26 +1,28 @@
 import { FormControl, OutlinedInput } from "@mui/material";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import React from "react";
 
-// eslint-disable-next-line react/display-name
-export const Input = React.forwardRef(
-  ({ value, type, placeholder, onChange, multiline, rows }, ref) => {
-    return (
-      <StyledFormControl fullWidth>
-        <OutlinedInput
-          value={value}
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          multiline={multiline}
-          rows={multiline ? rows : ""}
-          inputRef={ref}
-        />
-      </StyledFormControl>
-    );
-  }
-);
+export const Input = ({
+  value,
+  type,
+  placeholder,
+  onChange,
+  multiline,
+  rows,
+}) => {
+  return (
+    <StyledFormControl fullWidth>
+      <OutlinedInput
+        value={value}
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        multiline={multiline}
+        rows={multiline ? rows : ""}
+      />
+    </StyledFormControl>
+  );
+};
 
 Input.propTypes = {
   value: PropTypes.string,
