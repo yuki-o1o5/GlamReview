@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useProductReviews = (productId) => {
   const [averageScore, setAverageScore] = useState(0);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchAllReviews = async () => {
@@ -10,10 +11,10 @@ export const useProductReviews = (productId) => {
       const average =
         data.reduce((accum, curr) => accum + curr.score, 0) / data.length;
       setAverageScore(average);
+      setReviews(data);
     };
-
     fetchAllReviews();
   }, [productId]);
 
-  return { averageScore };
+  return { averageScore, reviews };
 };

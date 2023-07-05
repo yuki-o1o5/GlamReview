@@ -12,10 +12,7 @@ import { PLACEHOLDER_REVIEW, PLACEHOLDER_TITLE } from "../constants/message";
 
 // eslint-disable-next-line react/display-name
 export const ReviewForm = forwardRef(
-  (
-    { productId, fetchAllReviews, editMode = false, reviewId, originalReview },
-    ref
-  ) => {
+  ({ productId, editMode = false, reviewId, originalReview }, ref) => {
     const { user } = useContext(UserContext);
     const [title, setTitle] = useState(editMode ? originalReview.title : "");
     const [review, setReview] = useState(editMode ? originalReview.review : "");
@@ -53,7 +50,6 @@ export const ReviewForm = forwardRef(
       if (response.ok) {
         const data = await response.json();
         console.log("Success:", data);
-        fetchAllReviews(productId);
       } else {
         console.error("Error:", response.statusText);
       }
@@ -69,7 +65,6 @@ export const ReviewForm = forwardRef(
 
       if (response.ok) {
         console.log("Success: Review updated");
-        fetchAllReviews(productId);
       } else {
         console.error("Error:", response.statusText);
       }

@@ -13,12 +13,18 @@ export const ReviewCard = ({
   score,
   date,
   productId,
-  fetchAllReviews,
+  // setReviewEditModalOpen,
 }) => {
   const { user } = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
-  const handleOpenModal = () => setModalOpen(true);
-  const handleCloseModal = () => setModalOpen(false);
+  const handleOpenModal = () => {
+    setModalOpen(true);
+    // setReviewEditModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    // setReviewEditModalOpen(false);
+  };
 
   const handleRemoveReview = async () => {
     const response = await fetch(`/api/reviews/${id}`, {
@@ -27,7 +33,6 @@ export const ReviewCard = ({
 
     if (response.ok) {
       console.log("Success: Review removed");
-      fetchAllReviews(productId);
     } else {
       console.error("Error:", response.statusText);
     }
@@ -46,14 +51,15 @@ export const ReviewCard = ({
           <Date color="text.secondary">{date}</Date>
         </SubWrapper>
         <Modal open={modalOpen} onClose={handleCloseModal} disableEnforceFocus>
-          <ReviewForm
-            productId={productId}
-            fetchAllReviews={fetchAllReviews}
-            editMode={true}
-            reviewId={id}
-            name={userName}
-            originalReview={{ title, review, score, date }}
-          />
+          <>
+            <ReviewForm
+              productId={productId}
+              editMode={true}
+              reviewId={id}
+              name={userName}
+              originalReview={{ title, review, score, date }}
+            />
+          </>
         </Modal>
         <ButtonContainer>
           {userName === user ? (
@@ -88,7 +94,7 @@ ReviewCard.propTypes = {
   score: PropTypes.number,
   date: PropTypes.string,
   productId: PropTypes.string,
-  fetchAllReviews: PropTypes.func,
+  setReviewEditModalOpen: PropTypes.func,
 };
 
 const ReviewCardWrapper = styled.div`
