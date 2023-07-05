@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ReviewForm } from "../components/ReviewForm";
 import { ReviewCard } from "../components/ReviewCard";
 import { UserContext } from "../contexts/UserContext";
+import Footer from "../components/Footer";
 
 export const ProductPage = () => {
   const [product, setProduct] = useState({});
@@ -107,6 +108,7 @@ export const ProductPage = () => {
           ))}
         </AllReviewsWrapper>
       </PageContainer>
+      <Footer />
     </>
   );
 };

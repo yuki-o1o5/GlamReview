@@ -27,7 +27,7 @@ export const Header = () => {
             sx={{ flexGrow: 1, fontFamily: '"Kdam Thmor Pro", sans-serif' }}
             onClick={handleHome}
           >
-            SPARKLESCOOP
+            GlamReview
           </Typography>
           <LoginName>{user ? user : "Guest"}</LoginName>
           {user ? (

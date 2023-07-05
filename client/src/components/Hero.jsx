@@ -6,7 +6,7 @@ export const Hero = () => {
     <ImgWrapper>
       <Img src={TopImage} alt="top image" />
       <TextContainer>
-        <Title>Welcome to SPARKLESCOOP</Title>
+        <Title>Welcome to GlamReview</Title>
         <Introduction>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad cupiditate
           consequatur accusamus voluptatum non error asperiores eaque soluta
