@@ -51,18 +51,18 @@ export const HomePage = () => {
         </Text>
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
+            <StyledBox>
+              <StyledTabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="clinique" value="1" />
-                <Tab label="covergirl" value="2" />
-                <Tab label="maybelline" value="3" />
-                <Tab label="milani" value="4" />
-                <Tab label="revlon" value="5" />
-              </TabList>
-            </Box>
+                <StyledTab label="clinique" value="1" />
+                <StyledTab label="covergirl" value="2" />
+                <StyledTab label="maybelline" value="3" />
+                <StyledTab label="milani" value="4" />
+                <StyledTab label="revlon" value="5" />
+              </StyledTabList>
+            </StyledBox>
             <TabPanel value="1">
               <ProductsContainer products={products.clinique} />
             </TabPanel>
@@ -87,12 +87,22 @@ export const HomePage = () => {
 };
 
 const Wrapper = styled.section`
-  padding: 0px 170px 50px;
+  padding: 0px 20px 50px;
+  @media (min-width: 768px) {
+    padding: 0px 170px 50px;
+  }
 `;
 
-// const StyledBox = styled(Box)`
-//   border-bottom: 1rem;
-// `;
+const StyledBox = styled(Box)`
+  border-bottom: 1rem;
+  overflow-x: auto !important;
+`;
+
+const StyledTabList = styled(TabList)`
+  white-space: nowrap;
+`;
+
+const StyledTab = styled(Tab)``;
 
 const Text = styled.section`
   padding: 50px 0;

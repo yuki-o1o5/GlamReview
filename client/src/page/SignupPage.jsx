@@ -55,7 +55,7 @@ export const SignupPage = () => {
         </Typography>
         <LinkContainer>
           <LinkTitle>Already have an account? </LinkTitle>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Go to Login</Link>
         </LinkContainer>
         <InputAndErrorContainer>
           <Paper
@@ -139,24 +139,26 @@ const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Varela", sans-serif;
 `;
 
 const FormContainer = styled.form`
-  width: 20%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   border: 0.5px solid #808896;
   margin-top: 100px;
-  padding: 40px 60px;
-  font-family: "Varela", sans-serif;
+  padding: 30px 40px;
+  @media (min-width: 768px) {
+    width: 25%;
+    padding: 40px 60px;
+  }
 `;
-
 const LinkTitle = styled.div`
   margin-right: 10px;
 `;
 
 const LinkContainer = styled.div`
-  display: flex;
   margin-bottom: 20px;
 `;
 

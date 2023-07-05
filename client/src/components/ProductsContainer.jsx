@@ -12,7 +12,7 @@ export default function ProductsContainer({ products }) {
     >
       {products.map((product, index) => {
         return (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid item xs={12} sm={4} md={4} key={index}>
             <ProductCard product={product} key={index} />
           </Grid>
         );

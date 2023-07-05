@@ -134,7 +134,6 @@ export const ReviewForm = forwardRef(
               <Button variant="outlined" type="submit">
                 register
               </Button>
-              {/* <MainButton variant="outlined" type="submit">register</MainButton> */}
             </ButtonContainer>
           </form>
         </StyledBox>
@@ -178,8 +177,10 @@ const InputSubTitle = styled.div`
 `;
 
 const FlexContainer = styled.div`
-  display: flex;
-  gap: 20px;
+  @media (min-width: 768px) {
+    display: flex;
+    gap: 20px;
+  }
 `;
 
 const SelectContainer = styled.div`
@@ -188,11 +189,15 @@ const SelectContainer = styled.div`
 `;
 
 const StyledBox = styled(Box)`
-  width: 40%;
+  width: 80%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 50px;
+  padding: 20px;
+  @media (min-width: 768px) {
+    width: 40%;
+    padding: 50px;
+  }
 `;

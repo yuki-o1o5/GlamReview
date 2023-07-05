@@ -20,9 +20,9 @@ export const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <StyledAppBar position="static" elevation={0}>
-        <Toolbar style={{ padding: "0 170px" }}>
+        <StyledToolbar>
           <Typography
-            variant="h5"
+            variant="h6"
             component="div"
             sx={{ flexGrow: 1, fontFamily: '"Kdam Thmor Pro", sans-serif' }}
             onClick={handleHome}
@@ -43,7 +43,7 @@ export const Header = () => {
               Login
             </Button>
           )}
-        </Toolbar>
+        </StyledToolbar>
       </StyledAppBar>
     </Box>
   );
@@ -54,8 +54,18 @@ const StyledAppBar = styled(AppBar)`
   color: ${(props) => props.theme.palette.custom.main};
 `;
 
+const StyledToolbar = styled(Toolbar)`
+  padding: 0 20px;
+  @media (min-width: 768px) {
+    padding: 0 170px;
+  }
+`;
+
 const LoginName = styled.div`
   font-family: "Varela", sans-serif;
-  margin-right: 50px;
-  font-size: 1.2rem;
+  margin-right: 10px;
+  @media (min-width: 768px) {
+    margin-right: 50px;
+    font-size: 1.2rem;
+  }
 `;

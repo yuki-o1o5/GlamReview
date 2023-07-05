@@ -92,9 +92,12 @@ ReviewCard.propTypes = {
 };
 
 const ReviewCardWrapper = styled.div`
-  width: 70%;
+  width: 100%;
   margin-bottom: 60px;
   border-bottom: 1px solid ${(props) => props.theme.palette.custom.light};
+  @media (min-width: 768px) {
+    width: 70%;
+  }
 `;
 
 const SubWrapper = styled.div`

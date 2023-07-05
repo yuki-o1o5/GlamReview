@@ -55,7 +55,7 @@ export const LoginPage = () => {
         </Typography>
         <LinkContainer>
           <LinkTitle>New to Cosme Review? </LinkTitle>
-          <Link to="/signup">Signup</Link>
+          <Link to="/signup">Go to Signup</Link>
         </LinkContainer>
         <InputAndErrorContainer>
           <Paper
@@ -115,12 +115,16 @@ const PageContainer = styled.div`
 `;
 
 const FormContainer = styled.form`
-  width: 20%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   border: 0.5px solid #808896;
   margin-top: 100px;
-  padding: 40px 60px;
+  padding: 30px 40px;
+  @media (min-width: 768px) {
+    width: 25%;
+    padding: 40px 60px;
+  }
 `;
 
 const LinkTitle = styled.div`
@@ -128,7 +132,6 @@ const LinkTitle = styled.div`
 `;
 
 const LinkContainer = styled.div`
-  display: flex;
   margin-bottom: 20px;
 `;
 

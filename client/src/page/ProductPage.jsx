@@ -112,30 +112,43 @@ export const ProductPage = () => {
 };
 
 const PageContainer = styled.div`
-  padding: 10px 170px;
+  padding: 0px 20px;
+  @media (min-width: 768px) {
+    padding: 0px 170px 50px;
+  }
 `;
 
 const ProductContainer = styled.div`
-  display: flex;
-  width: 100%;
   height: 100%;
-  margin: 50px 0 50px;
   gap: 30px;
+  @media (min-width: 768px) {
+    display: flex;
+    width: 100%;
+    margin: 50px 0 50px;
+  }
 `;
 
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 100%;
   background-color: #fff;
+  margin: 50px 0 50px;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const TextsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 60%;
+  width: 100%;
+  margin: 50px 0 50px;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const ReviewNumber = styled(Typography)`

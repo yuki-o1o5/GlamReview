@@ -19,22 +19,30 @@ export const Hero = () => {
 };
 
 const ImgWrapper = styled.section`
-  display: flex;
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `;
 
 const Img = styled.img`
-  width: 50%;
+  width: 100%;
   object-fit: contain;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const TextContainer = styled.div`
-  width: 50%;
-  padding: 0 100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgb(251 252 254);
+  @media (min-width: 768px) {
+    width: 50%;
+    padding: 0 100px;
+  }
 `;
 
 const Title = styled.h1`
@@ -44,6 +52,9 @@ const Title = styled.h1`
 
 const Introduction = styled.div`
   font-family: "Kdam Thmor Pro", sans-serif;
-  margin-top: 40px;
+  margin: 0 20px 30px;
   color: #c597a0;
+  @media (min-width: 768px) {
+    margin-top: 40px;
+  }
 `;
