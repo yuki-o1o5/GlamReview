@@ -1,4 +1,4 @@
-# GlamReview | Cosme
+# GlamReview | Cosmetic Product Review App
 
 ## What is this?
 
