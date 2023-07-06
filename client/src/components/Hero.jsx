@@ -8,10 +8,12 @@ export const Hero = () => {
       <TextContainer>
         <Title>Welcome to GlamReview</Title>
         <Introduction>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad cupiditate
-          consequatur accusamus voluptatum non error asperiores eaque soluta
-          inventore quas! Culpa nesciunt ad repellendus cum neque sapiente nihil
-          minus odio?
+          Your personal guide to the world of cosmetics. Our platform is
+          designed to empower you, the user, by providing you with comprehensive
+          information on a wide range of cosmetic products. But we don't stop at
+          just the product details. We believe in the power of shared
+          experiences, and that's why we invite all our users to read, create,
+          edit, and even delete product reviews.
         </Introduction>
       </TextContainer>
     </ImgWrapper>
@@ -19,7 +21,7 @@ export const Hero = () => {
 };
 
 const ImgWrapper = styled.section`
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: flex;
   }
 `;
@@ -27,7 +29,7 @@ const ImgWrapper = styled.section`
 const Img = styled.img`
   width: 100%;
   object-fit: contain;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     width: 50%;
   }
 `;
@@ -39,7 +41,7 @@ const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgb(251 252 254);
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     width: 50%;
     padding: 0 100px;
   }
