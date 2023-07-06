@@ -61,12 +61,7 @@ export const LoginPage = () => {
           <Link to="/signup">Go to Signup</Link>
         </LinkContainer>
         <InputAndErrorContainer>
-          <Paper
-            component="div"
-            sx={{
-              p: "7px",
-            }}
-          >
+          <StyledPaper>
             <StyledInputBase
               placeholder="email"
               type="email"
@@ -77,15 +72,10 @@ export const LoginPage = () => {
               })}
               autoComplete="email"
             />
-          </Paper>
+          </StyledPaper>
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
-        <Paper
-          component="div"
-          sx={{
-            p: "7px",
-          }}
-        >
+        <StyledPaper>
           <StyledInputBase
             placeholder="password"
             type="password"
@@ -96,7 +86,7 @@ export const LoginPage = () => {
             })}
             autoComplete="off"
           />
-        </Paper>
+        </StyledPaper>
         {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         <ButtonContainer>
           <Button variant="outlined" type="submit">
@@ -132,6 +122,10 @@ const FormContainer = styled.form`
     width: 25%;
     padding: 40px 60px;
   }
+`;
+
+const StyledPaper = styled(Paper)`
+  padding: 6px;
 `;
 
 const LinkTitle = styled.div`
