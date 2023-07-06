@@ -40,14 +40,12 @@ export const SignupPage = () => {
     });
 
     if (response.ok) {
-      // setMessage(SUCCESSFUL_REGISTER);
       setAuthMessage({ isError: false, message: SUCCESSFUL_REGISTER });
       setTimeout(() => {
         navigate("/login");
       }, 1500);
       return true;
     } else {
-      // setMessage(ERROR_REGISTER);
       setAuthMessage({ isError: true, message: ERROR_REGISTER });
       return false;
     }
@@ -63,14 +61,7 @@ export const SignupPage = () => {
           <Link to="/login">Go to Login</Link>
         </LinkContainer>
         <InputAndErrorContainer>
-          <Paper
-            component="div"
-            sx={{
-              p: "5px 4px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+          <StyledPaper>
             <StyledInputBase
               placeholder="Name"
               type="text"
@@ -80,18 +71,11 @@ export const SignupPage = () => {
               })}
               autoComplete="off"
             />
-          </Paper>
+          </StyledPaper>
           {errors.userName && <ErrorText>{ERROR_USER_NAME}</ErrorText>}
         </InputAndErrorContainer>
         <InputAndErrorContainer>
-          <Paper
-            component="div"
-            sx={{
-              p: "5px 4px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+          <StyledPaper>
             <StyledInputBase
               placeholder="email"
               type="email"
@@ -102,18 +86,11 @@ export const SignupPage = () => {
               })}
               autoComplete="email"
             />
-          </Paper>
+          </StyledPaper>
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
         <InputAndErrorContainer>
-          <Paper
-            component="div"
-            sx={{
-              p: "5px 4px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+          <StyledPaper>
             <StyledInputBase
               placeholder="password"
               type="password"
@@ -124,7 +101,7 @@ export const SignupPage = () => {
               })}
               autoComplete="off"
             />
-          </Paper>
+          </StyledPaper>
           {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         </InputAndErrorContainer>
         <ButtonContainer>
@@ -163,6 +140,11 @@ const FormContainer = styled.form`
     padding: 40px 60px;
   }
 `;
+
+const StyledPaper = styled(Paper)`
+  padding: 6px;
+`;
+
 const LinkTitle = styled.div`
   margin-right: 10px;
 `;
