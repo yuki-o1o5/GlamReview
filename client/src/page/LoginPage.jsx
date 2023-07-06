@@ -13,7 +13,10 @@ import { UserContext } from "../contexts/UserContext";
 import { emailRegex, passwordRegex } from "../utils/regexUtils";
 
 export const LoginPage = () => {
-  const [message, setMessage] = useState("");
+  const [authMessage, setAuthMessage] = useState({
+    isError: false,
+    message: "",
+  });
   const { dispatch } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -33,17 +36,17 @@ export const LoginPage = () => {
     if (response.ok) {
       const user = await response.json();
       if (!user) {
-        setMessage(ERROR_LOGIN);
+        setAuthMessage({ isError: true, message: ERROR_LOGIN });
       } else {
         dispatch({ type: "LOGIN", payload: user.userName });
-        setMessage(SUCCESSFUL_LOGIN);
+        setAuthMessage({ isError: false, message: SUCCESSFUL_LOGIN });
         setTimeout(() => {
           navigate("/");
         }, 1500);
       }
     } else {
       const errorData = await response.json();
-      setMessage(errorData.message);
+      setAuthMessage({ isError: true, message: errorData.message });
     }
   };
 
@@ -100,7 +103,11 @@ export const LoginPage = () => {
             login
           </Button>
         </ButtonContainer>
-        {message && <LoginMessage>{message}</LoginMessage>}
+        {authMessage && (
+          <LoginMessage isError={authMessage.isError}>
+            {authMessage.message}
+          </LoginMessage>
+        )}
       </FormContainer>
     </PageContainer>
   );
@@ -155,7 +162,7 @@ const ButtonContainer = styled.div`
 `;
 
 const LoginMessage = styled.div`
-  color: #7e7c0a;
+  color: ${({ isError }) => (isError ? "#8f2220" : "#7e7c0a")};
   margin-top: 10px;
   width: 100%;
   display: flex;

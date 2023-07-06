@@ -13,7 +13,10 @@ import {
 import { emailRegex, passwordRegex } from "../utils/regexUtils";
 
 export const SignupPage = () => {
-  const [message, setMessage] = useState("");
+  const [authMessage, setAuthMessage] = useState({
+    isError: false,
+    message: "",
+  });
 
   const navigate = useNavigate();
 
@@ -37,13 +40,15 @@ export const SignupPage = () => {
     });
 
     if (response.ok) {
-      setMessage(SUCCESSFUL_REGISTER);
+      // setMessage(SUCCESSFUL_REGISTER);
+      setAuthMessage({ isError: false, message: SUCCESSFUL_REGISTER });
       setTimeout(() => {
         navigate("/login");
       }, 1500);
       return true;
     } else {
-      setMessage(ERROR_REGISTER);
+      // setMessage(ERROR_REGISTER);
+      setAuthMessage({ isError: true, message: ERROR_REGISTER });
       return false;
     }
   };
@@ -127,7 +132,11 @@ export const SignupPage = () => {
             register
           </Button>
         </ButtonContainer>
-        {message && <SignupMessage>{message}</SignupMessage>}
+        {authMessage && (
+          <SignupMessage isError={authMessage.isError}>
+            {authMessage.message}
+          </SignupMessage>
+        )}
       </FormContainer>
     </PageContainer>
   );
@@ -181,7 +190,7 @@ const ButtonContainer = styled.div`
 `;
 
 const SignupMessage = styled.div`
-  color: #7e7c0a;
+  color: ${({ isError }) => (isError ? "#8f2220" : "#7e7c0a")};
   margin-top: 10px;
   width: 100%;
   display: flex;
