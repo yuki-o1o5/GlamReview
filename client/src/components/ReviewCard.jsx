@@ -13,17 +13,15 @@ export const ReviewCard = ({
   score,
   date,
   productId,
-  // setReviewEditModalOpen,
+  fetchAllReviews,
 }) => {
   const { user } = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => {
     setModalOpen(true);
-    // setReviewEditModalOpen(true);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
-    // setReviewEditModalOpen(false);
   };
 
   const handleRemoveReview = async () => {
@@ -33,6 +31,7 @@ export const ReviewCard = ({
 
     if (response.ok) {
       console.log("Success: Review removed");
+      fetchAllReviews(productId);
     } else {
       console.error("Error:", response.statusText);
     }
@@ -58,6 +57,7 @@ export const ReviewCard = ({
               reviewId={id}
               name={userName}
               originalReview={{ title, review, score, date }}
+              fetchAllReviews={fetchAllReviews}
             />
           </>
         </Modal>
@@ -94,7 +94,7 @@ ReviewCard.propTypes = {
   score: PropTypes.number,
   date: PropTypes.string,
   productId: PropTypes.string,
-  setReviewEditModalOpen: PropTypes.func,
+  fetchAllReviews: PropTypes.func,
 };
 
 const ReviewCardWrapper = styled.div`

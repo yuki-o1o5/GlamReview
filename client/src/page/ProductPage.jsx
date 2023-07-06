@@ -6,10 +6,9 @@ import { ReviewForm } from "../components/ReviewForm";
 import { ReviewCard } from "../components/ReviewCard";
 import { UserContext } from "../contexts/UserContext";
 import Footer from "../components/Footer";
-import { useProductReviews } from "../hooks/useProductReviews";
 
 export const ProductPage = () => {
-  // const [reviewEditModalOpen, setReviewEditModalOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const { user } = useContext(UserContext);
@@ -19,6 +18,7 @@ export const ProductPage = () => {
 
   useEffect(() => {
     fetchProductsDataById(productId);
+    fetchAllReviews(productId);
   }, [productId]);
 
   const fetchProductsDataById = async (productId) => {
@@ -29,16 +29,14 @@ export const ProductPage = () => {
     setProduct(data);
   };
 
-  const { averageScore, reviews } = useProductReviews(productId);
+  const fetchAllReviews = async (productId) => {
+    const res = await fetch(`/api/reviews/${productId}`);
+    const data = await res.json();
+    setReviews(data);
+  };
 
-  // const fetchAllReviews = async (productId) => {
-  //   const res = await fetch(`/api/reviews/${productId}`);
-  //   const data = await res.json();
-  //   setReviews(data);
-  // };
-
-  // const average =
-  //   reviews.reduce((accum, curr) => accum + curr.score, 0) / reviews.length;
+  const average =
+    reviews.reduce((accum, curr) => accum + curr.score, 0) / reviews.length;
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
@@ -60,9 +58,9 @@ export const ProductPage = () => {
             </Typography>
             <ReviewContainer>
               <ReviewNumber gutterBottom variant="h6" component="div">
-                {averageScore ? `${averageScore}` : `0 review`}
+                {average ? `${average}` : `0 review`}
               </ReviewNumber>
-              <Rating name="read-only" value={averageScore || 0} readOnly />
+              <Rating name="read-only" value={average || 0} readOnly />
             </ReviewContainer>
             <Typography gutterBottom component="div">
               {product.description}
@@ -87,7 +85,11 @@ export const ProductPage = () => {
             disableEnforceFocus
           >
             <>
-              <ReviewForm productId={productId} editMode={false} />
+              <ReviewForm
+                productId={productId}
+                editMode={false}
+                fetchAllReviews={fetchAllReviews}
+              />
             </>
           </Modal>
           {reviews.map((item, index) => (
@@ -100,7 +102,7 @@ export const ProductPage = () => {
               date={item.date}
               key={index}
               productId={productId}
-              // setReviewEditModalOpen={setReviewEditModalOpen}
+              fetchAllReviews={fetchAllReviews}
             />
           ))}
         </AllReviewsWrapper>
