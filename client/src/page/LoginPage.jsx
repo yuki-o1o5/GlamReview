@@ -1,4 +1,4 @@
-import { Button, InputBase, Paper, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useState } from "react";
 import {
@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 import { emailRegex, passwordRegex } from "../utils/regexUtils";
+import { UserInput } from "../components/userInput";
 
 export const LoginPage = () => {
   const [authMessage, setAuthMessage] = useState({
@@ -61,32 +62,24 @@ export const LoginPage = () => {
           <Link to="/signup">Go to Signup</Link>
         </LinkContainer>
         <InputAndErrorContainer>
-          <StyledPaper>
-            <StyledInputBase
-              placeholder="email"
-              type="email"
-              fullWidth
-              {...register("email", {
-                required: true,
-                pattern: emailRegex,
-              })}
-              autoComplete="email"
-            />
-          </StyledPaper>
+          <UserInput
+            placeholder="email"
+            type="email"
+            register={register}
+            label={"email"}
+            pattern={emailRegex}
+            autoComplete="email"
+          />
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
-        <StyledPaper>
-          <StyledInputBase
-            placeholder="password"
-            type="password"
-            fullWidth
-            {...register("password", {
-              required: true,
-              pattern: passwordRegex,
-            })}
-            autoComplete="off"
-          />
-        </StyledPaper>
+        <UserInput
+          placeholder="password"
+          type="password"
+          register={register}
+          label={"password"}
+          pattern={passwordRegex}
+          autoComplete="off"
+        />
         {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         <ButtonContainer>
           <Button variant="outlined" type="submit">
@@ -124,10 +117,6 @@ const FormContainer = styled.form`
   }
 `;
 
-const StyledPaper = styled(Paper)`
-  padding: 6px;
-`;
-
 const LinkTitle = styled.div`
   margin-right: 10px;
 `;
@@ -138,10 +127,6 @@ const LinkContainer = styled.div`
 
 const InputAndErrorContainer = styled.div`
   margin-bottom: 10px;
-`;
-
-const StyledInputBase = styled(InputBase)`
-  font-size: 13px;
 `;
 
 const ErrorText = styled.span`

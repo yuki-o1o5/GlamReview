@@ -1,4 +1,4 @@
-import { Button, InputBase, Paper, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import {
   SUCCESSFUL_REGISTER,
 } from "../constants/message";
 import { emailRegex, passwordRegex } from "../utils/regexUtils";
+import { UserInput } from "../components/userInput";
 
 export const SignupPage = () => {
   const [authMessage, setAuthMessage] = useState({
@@ -38,6 +39,7 @@ export const SignupPage = () => {
         password: data.password,
       }),
     });
+    const responseData = await response.json();
 
     if (response.ok) {
       setAuthMessage({ isError: false, message: SUCCESSFUL_REGISTER });
@@ -46,7 +48,10 @@ export const SignupPage = () => {
       }, 1500);
       return true;
     } else {
-      setAuthMessage({ isError: true, message: ERROR_REGISTER });
+      const message = responseData.message
+        ? responseData.message
+        : ERROR_REGISTER;
+      setAuthMessage({ isError: true, message });
       return false;
     }
   };
@@ -61,47 +66,35 @@ export const SignupPage = () => {
           <Link to="/login">Go to Login</Link>
         </LinkContainer>
         <InputAndErrorContainer>
-          <StyledPaper>
-            <StyledInputBase
-              placeholder="Name"
-              type="text"
-              fullWidth
-              {...register("userName", {
-                required: true,
-              })}
-              autoComplete="off"
-            />
-          </StyledPaper>
+          <UserInput
+            placeholder="Name"
+            type="text"
+            register={register}
+            label={"userName"}
+            autoComplete="off"
+          />
           {errors.userName && <ErrorText>{ERROR_USER_NAME}</ErrorText>}
         </InputAndErrorContainer>
         <InputAndErrorContainer>
-          <StyledPaper>
-            <StyledInputBase
-              placeholder="email"
-              type="email"
-              fullWidth
-              {...register("email", {
-                required: true,
-                pattern: emailRegex,
-              })}
-              autoComplete="email"
-            />
-          </StyledPaper>
+          <UserInput
+            placeholder="email"
+            type="email"
+            register={register}
+            label={"email"}
+            pattern={emailRegex}
+            autoComplete="email"
+          />
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
         <InputAndErrorContainer>
-          <StyledPaper>
-            <StyledInputBase
-              placeholder="password"
-              type="password"
-              fullWidth
-              {...register("password", {
-                required: true,
-                pattern: passwordRegex,
-              })}
-              autoComplete="off"
-            />
-          </StyledPaper>
+          <UserInput
+            placeholder="password"
+            type="password"
+            register={register}
+            label={"password"}
+            pattern={passwordRegex}
+            autoComplete="off"
+          />
           {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         </InputAndErrorContainer>
         <ButtonContainer>
@@ -141,10 +134,6 @@ const FormContainer = styled.form`
   }
 `;
 
-const StyledPaper = styled(Paper)`
-  padding: 6px;
-`;
-
 const LinkTitle = styled.div`
   margin-right: 10px;
 `;
@@ -155,10 +144,6 @@ const LinkContainer = styled.div`
 
 const InputAndErrorContainer = styled.div`
   margin-bottom: 10px;
-`;
-
-const StyledInputBase = styled(InputBase)`
-  font-size: 13px;
 `;
 
 const ErrorText = styled.span`
