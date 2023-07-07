@@ -18,17 +18,12 @@ export const Header = () => {
     dispatch({ type: "LOGOUT" });
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <StyledBox>
       <StyledAppBar position="static" elevation={0}>
         <StyledToolbar>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, fontFamily: '"Kdam Thmor Pro", sans-serif' }}
-            onClick={handleHome}
-          >
+          <AppTitle variant="h6" component="div" onClick={handleHome}>
             GlamReview
-          </Typography>
+          </AppTitle>
           <LoginName>{user ? user : "Guest"}</LoginName>
           {user ? (
             <Button
@@ -45,7 +40,7 @@ export const Header = () => {
           )}
         </StyledToolbar>
       </StyledAppBar>
-    </Box>
+    </StyledBox>
   );
 };
 
@@ -61,11 +56,20 @@ const StyledToolbar = styled(Toolbar)`
   }
 `;
 
+const StyledBox = styled(Box)`
+  flex-grow: 1;
+`;
+
 const LoginName = styled.div`
   font-family: "Varela", sans-serif;
-  margin-right: 10px;
+  margin-right: 20px;
   @media (min-width: 768px) {
     margin-right: 50px;
     font-size: 1.2rem;
   }
+`;
+
+const AppTitle = styled(Typography)`
+  flex-grow: 1;
+  font-family: "Kdam Thmor Pro", sans-serif;
 `;

@@ -1,14 +1,14 @@
 import { Grid } from "@mui/material";
 import { ProductCard } from "./ProductCard";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 export default function ProductsContainer({ products }) {
   return (
-    <Grid
+    <StyledGrid
       container
       spacing={{ xs: 1, md: 2 }}
       columns={{ xs: 3, sm: 8, md: 12 }}
-      style={{ display: "flex", justifyContent: "center" }}
     >
       {products.map((product, index) => {
         return (
@@ -17,10 +17,15 @@ export default function ProductsContainer({ products }) {
           </Grid>
         );
       })}
-    </Grid>
+    </StyledGrid>
   );
 }
 
 ProductsContainer.propTypes = {
   products: PropTypes.array,
 };
+
+const StyledGrid = styled(Grid)`
+  display: flex;
+  justify-content: center;
+`;

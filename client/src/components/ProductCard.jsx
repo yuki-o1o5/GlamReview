@@ -20,15 +20,15 @@ export const ProductCard = ({ product }) => {
     navigate(`/${productId}`);
   };
 
+
+
   return (
-    <Card style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <StyledCard>
       <CardActionArea onClick={() => handleClick(product.id)}>
         <ImageWrapper>
           <img src={product.image_link} alt={product.name} />
         </ImageWrapper>
-        <CardContent
-          style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
-        >
+        <StyledCardContent>
           <Title gutterBottom variant="subtitle1" component="h2">
             {product.name}
           </Title>
@@ -46,9 +46,9 @@ export const ProductCard = ({ product }) => {
               size="small"
             />
           </ReviewContainer>
-        </CardContent>
+        </StyledCardContent>
       </CardActionArea>
-    </Card>
+    </StyledCard>
   );
 };
 
@@ -66,6 +66,18 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const StyledCardContent = styled(CardContent)`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
+
+const StyledCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const Title = styled(Typography)`
