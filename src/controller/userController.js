@@ -4,9 +4,15 @@ const User = require("../model/userModel");
 class UserController {
   async createUser(req, res) {
     try {
-      const { password, ...rest } = req.body;
-      const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds, adjust as necessary
-      const user = new User({ ...rest, password: hashedPassword });
+      const { email, password, ...rest } = req.body;
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res
+          .status(400)
+          .send({ message: "User with this email already exists" });
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = new User({ ...rest, email, password: hashedPassword });
       const result = await user.save();
       res.send(result);
     } catch (error) {
