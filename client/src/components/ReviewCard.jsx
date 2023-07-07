@@ -37,6 +37,8 @@ export const ReviewCard = ({
     }
   };
 
+  const modifiedDate = date.slice(0, 10);
+
   return (
     <ReviewCardWrapper>
       <SubWrapper>
@@ -47,7 +49,7 @@ export const ReviewCard = ({
       <CardBottomWrapper>
         <SubWrapper>
           <UserName color="text.secondary">by {userName}</UserName>
-          <Date color="text.secondary">{date}</Date>
+          <Date color="text.secondary">{modifiedDate}</Date>
         </SubWrapper>
         <Modal open={modalOpen} onClose={handleCloseModal} disableEnforceFocus>
           <>
@@ -124,7 +126,6 @@ const Description = styled(Typography)`
 
 const UserName = styled(Typography)`
   font-size: 0.8rem;
-  margin-left: 0.5rem;
 `;
 
 const Date = styled(Typography)`
