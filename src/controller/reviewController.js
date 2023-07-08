@@ -3,7 +3,13 @@ const Review = require("../model/reviewModel");
 class ReviewController {
   async createReview(req, res) {
     try {
-      const review = new Review(req.body);
+      const { userId, productId, ...rest } = req.body;
+      const existingReview = await Review.findOne({ userId, productId });
+      if (existingReview) {
+        res.status(400).send({ message: "User already reviewed this product" });
+        return;
+      }
+      const review = new Review({ userId, productId, ...rest });
       const result = await review.save();
       res.send(result);
     } catch {

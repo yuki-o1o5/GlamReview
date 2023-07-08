@@ -12,6 +12,8 @@ import {
   ERROR_FORMREGISTER,
   PLACEHOLDER_REVIEW,
   PLACEHOLDER_TITLE,
+  SUCCESSFUL_REVIEW_REGISTER,
+  SUCCESSFUL_REVIEW_UPDATE,
 } from "../constants/message";
 import ContainedButton from "./ContainedButton";
 
@@ -21,7 +23,7 @@ export const ReviewForm = forwardRef(
     { productId, editMode = false, reviewId, originalReview, fetchAllReviews },
     ref
   ) => {
-    const { user } = useContext(UserContext);
+    const { user, userId } = useContext(UserContext);
     const [title, setTitle] = useState(editMode ? originalReview.title : "");
     const [review, setReview] = useState(editMode ? originalReview.review : "");
     const [score, setScore] = useState(editMode ? originalReview.score : 5);
@@ -57,18 +59,33 @@ export const ReviewForm = forwardRef(
         setSubmitMessage({ isError: true, message: ERROR_FORMREGISTER });
         return;
       }
+
       const response = await fetch("/api/reviews", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user, title, review, score, date, productId }),
+        body: JSON.stringify({
+          user,
+          userId,
+          title,
+          review,
+          score,
+          date,
+          productId,
+        }),
       });
-
+      const responseData = await response.json();
       if (response.ok) {
-        const data = await response.json();
-        console.log("Success:", data);
+        setSubmitMessage({
+          isError: false,
+          message: SUCCESSFUL_REVIEW_REGISTER,
+        });
         fetchAllReviews(productId);
       } else {
-        console.error("Error:", response.statusText);
+        if (response.status === 400) {
+          setSubmitMessage({ isError: true, message: responseData.message });
+        } else {
+          console.error("Error:", response.statusText);
+        }
       }
     };
 
@@ -78,6 +95,7 @@ export const ReviewForm = forwardRef(
         setSubmitMessage({ isError: true, message: ERROR_FORMREGISTER });
         return;
       }
+
       const response = await fetch(`/api/reviews/${reviewId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -85,7 +103,10 @@ export const ReviewForm = forwardRef(
       });
 
       if (response.ok) {
-        console.log("Success: Review updated");
+        setSubmitMessage({
+          isError: false,
+          message: SUCCESSFUL_REVIEW_UPDATE,
+        });
         fetchAllReviews(productId);
       } else {
         console.error("Error:", response.statusText);
