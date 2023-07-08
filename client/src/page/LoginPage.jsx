@@ -64,7 +64,7 @@ export const LoginPage = () => {
         </LinkContainer>
         <InputAndErrorContainer>
           <UserInput
-            placeholder="email"
+            placeholder="Email"
             type="email"
             register={register}
             label={"email"}
@@ -74,7 +74,7 @@ export const LoginPage = () => {
           {errors.email && <ErrorText>{ERROR_EMAIL}</ErrorText>}
         </InputAndErrorContainer>
         <UserInput
-          placeholder="password"
+          placeholder="Password"
           type="password"
           register={register}
           label={"password"}

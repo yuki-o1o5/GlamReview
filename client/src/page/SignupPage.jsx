@@ -78,7 +78,7 @@ export const SignupPage = () => {
         </InputAndErrorContainer>
         <InputAndErrorContainer>
           <UserInput
-            placeholder="email"
+            placeholder="Email"
             type="email"
             register={register}
             label={"email"}
@@ -89,7 +89,7 @@ export const SignupPage = () => {
         </InputAndErrorContainer>
         <InputAndErrorContainer>
           <UserInput
-            placeholder="password"
+            placeholder="Password"
             type="password"
             register={register}
             label={"password"}
