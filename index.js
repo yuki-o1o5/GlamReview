@@ -1,11 +1,13 @@
 const express = require("express");
+const path = require("path");
 
 const { userController, reviewController } = require("./src/service/mongodb");
 
 const app = express();
-app.use(express.json());
 
 app.listen(8000, () => console.log("Server started on port 8000"));
+
+app.use(express.static(path.join(__dirname, "client", "dist")));
 
 // ========================================
 // About user
@@ -28,3 +30,7 @@ app.put("/api/reviews/:id", (req, res) =>
 app.delete("/api/reviews/:id", (req, res) =>
   reviewController.deleteReview(req, res)
 );
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
