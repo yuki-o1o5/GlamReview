@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
+import { Box, MenuItem, Select, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -8,7 +8,12 @@ import { forwardRef, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { UserContext } from "../contexts/UserContext";
 import { Input } from "./Input";
-import { PLACEHOLDER_REVIEW, PLACEHOLDER_TITLE } from "../constants/message";
+import {
+  ERROR_FORMREGISTER,
+  PLACEHOLDER_REVIEW,
+  PLACEHOLDER_TITLE,
+} from "../constants/message";
+import ContainedButton from "./ContainedButton";
 
 // eslint-disable-next-line react/display-name
 export const ReviewForm = forwardRef(
@@ -23,6 +28,10 @@ export const ReviewForm = forwardRef(
     const [date, setDate] = useState(
       editMode ? dayjs(originalReview.date) : dayjs()
     );
+    const [submitMessage, setSubmitMessage] = useState({
+      isError: false,
+      message: "",
+    });
 
     const handleTitle = (event) => {
       setTitle(event.target.value);
@@ -44,6 +53,10 @@ export const ReviewForm = forwardRef(
 
     const handleCreateReview = async (event) => {
       event.preventDefault();
+      if (title.trim() === "" || review.trim() === "") {
+        setSubmitMessage({ isError: true, message: ERROR_FORMREGISTER });
+        return;
+      }
       const response = await fetch("/api/reviews", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,7 +95,7 @@ export const ReviewForm = forwardRef(
             action="post"
             onSubmit={editMode ? handleUpdateReview : handleCreateReview}
           >
-            <Box component="div" noValidate autoComplete="off">
+            <Box component="div" noValidate>
               <Headline gutterBottom variant="h6" component="div">
                 Review by <UserName> {user ? user : "Guest"}</UserName>
               </Headline>
@@ -131,10 +144,17 @@ export const ReviewForm = forwardRef(
               </FlexContainer>
             </Box>
             <ButtonContainer>
-              <Button variant="outlined" type="submit">
-                register
-              </Button>
+              {editMode ? (
+                <ContainedButton type="submit">update</ContainedButton>
+              ) : (
+                <ContainedButton type="submit">register</ContainedButton>
+              )}
             </ButtonContainer>
+            {submitMessage && (
+              <SubmitMessage isError={submitMessage.isError}>
+                {submitMessage.message}
+              </SubmitMessage>
+            )}
           </form>
         </StyledBox>
       </>
@@ -165,15 +185,15 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const InputTitle = styled.div`
+const InputTitle = styled(Typography)`
   margin-top: 1rem;
   margin-bottom: 8px;
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.primary.main};
 `;
 
-const InputSubTitle = styled.div`
+const InputSubTitle = styled(Typography)`
   margin-top: 1rem;
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.primary.main};
 `;
 
 const FlexContainer = styled.div`
@@ -200,4 +220,13 @@ const StyledBox = styled(Box)`
     width: 40%;
     padding: 50px;
   }
+`;
+
+const SubmitMessage = styled(Typography)`
+  color: ${({ isError }) => (isError ? "#8f2220" : "#7e7c0a")};
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-item: center;
 `;

@@ -8,3 +8,4 @@ export const SUCCESSFUL_LOGIN = "Login is successful";
 export const ERROR_LOGIN = "Login failed. Invalid email or password.";
 export const PLACEHOLDER_TITLE = "Please write your review title!";
 export const PLACEHOLDER_REVIEW = "Please write your review!";
+export const ERROR_FORMREGISTER = "Both Title and Review are required ";
