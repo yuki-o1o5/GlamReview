@@ -31,7 +31,6 @@ export const ReviewCard = ({
     });
 
     if (response.ok) {
-      console.log("Success: Review removed");
       fetchAllReviews(productId);
     } else {
       console.error("Error:", response.statusText);

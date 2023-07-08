@@ -8,7 +8,6 @@ import { UserContext } from "../contexts/UserContext";
 import Footer from "../components/Footer";
 import { OutlinedButton } from "../components/OutlinedButton";
 
-
 export const ProductPage = () => {
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState({});
