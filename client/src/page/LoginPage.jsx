@@ -40,7 +40,10 @@ export const LoginPage = () => {
       if (!user) {
         setAuthMessage({ isError: true, message: ERROR_LOGIN });
       } else {
-        dispatch({ type: "LOGIN", payload: user.userName });
+        dispatch({
+          type: "LOGIN",
+          payload: { user: user.userName, useId: user._id },
+        });
         setAuthMessage({ isError: false, message: SUCCESSFUL_LOGIN });
         setTimeout(() => {
           navigate("/");

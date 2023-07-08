@@ -17,7 +17,9 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <UserContext.Provider value={{ user: state.user, dispatch }}>
+        <UserContext.Provider
+          value={{ user: state.user, useId: state.userId, dispatch }}
+        >
           <div>
             <Header />
             <Routes>
