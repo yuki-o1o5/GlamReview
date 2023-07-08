@@ -63,6 +63,7 @@ const LoginName = styled.div`
 `;
 
 const AppTitle = styled(Typography)`
+  cursor: pointer;
   flex-grow: 1;
   font-family: "Kdam Thmor Pro", sans-serif;
 `;
