@@ -74,6 +74,10 @@ export const ReviewForm = forwardRef(
 
     const handleUpdateReview = async (event) => {
       event.preventDefault();
+      if (title.trim() === "" || review.trim() === "") {
+        setSubmitMessage({ isError: true, message: ERROR_FORMREGISTER });
+        return;
+      }
       const response = await fetch(`/api/reviews/${reviewId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
