@@ -1,4 +1,4 @@
-import { Button, Modal, Rating, Typography } from "@mui/material";
+import { Modal, Rating, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,6 +6,8 @@ import { ReviewForm } from "../components/ReviewForm";
 import { ReviewCard } from "../components/ReviewCard";
 import { UserContext } from "../contexts/UserContext";
 import Footer from "../components/Footer";
+import { OutlinedButton } from "../components/OutlinedButton";
+
 
 export const ProductPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -67,13 +69,13 @@ export const ProductPage = () => {
             </Typography>
             <ButtonContainer>
               {!user ? (
-                <Button variant="outlined" onClick={handleGotoLogin}>
+                <OutlinedButton onClick={handleGotoLogin}>
                   Create Review
-                </Button>
+                </OutlinedButton>
               ) : !reviews.find((review) => review.user === user) ? (
-                <Button variant="outlined" onClick={handleOpenModal}>
+                <OutlinedButton onClick={handleOpenModal}>
                   Create Review
-                </Button>
+                </OutlinedButton>
               ) : null}
             </ButtonContainer>
           </TextsContainer>

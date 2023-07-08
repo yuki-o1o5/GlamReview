@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { Button, Modal, Rating, Typography } from "@mui/material";
+import { Modal, Rating, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { ReviewForm } from "./ReviewForm";
+import ContainedButton from "./ContainedButton";
 
 export const ReviewCard = ({
   id,
@@ -65,20 +66,16 @@ export const ReviewCard = ({
         </Modal>
         <ButtonContainer>
           {userName === user ? (
-            <Button size="small" variant="outlined" onClick={handleOpenModal}>
+            <ContainedButton size="small" onClick={handleOpenModal}>
               edit
-            </Button>
+            </ContainedButton>
           ) : (
             ""
           )}
           {userName === user ? (
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={handleRemoveReview}
-            >
+            <ContainedButton size="small" onClick={handleRemoveReview}>
               remove
-            </Button>
+            </ContainedButton>
           ) : (
             ""
           )}

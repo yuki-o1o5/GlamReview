@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import styled from "styled-components";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import {
 } from "../constants/message";
 import { emailRegex, passwordRegex } from "../utils/regexUtils";
 import { UserInput } from "../components/userInput";
+import ContainedButton from "../components/ContainedButton";
 
 export const SignupPage = () => {
   const [authMessage, setAuthMessage] = useState({
@@ -98,9 +99,9 @@ export const SignupPage = () => {
           {errors.password && <ErrorText>{ERROR_PASSWORD}</ErrorText>}
         </InputAndErrorContainer>
         <ButtonContainer>
-          <Button variant="outlined" type="submit">
+          <ContainedButton variant="outlined" type="submit">
             register
-          </Button>
+          </ContainedButton>
         </ButtonContainer>
         {authMessage && (
           <SignupMessage isError={authMessage.isError}>

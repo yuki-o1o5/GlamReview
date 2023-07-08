@@ -1,8 +1,9 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { OutlinedButton } from "./OutlinedButton";
 
 export const Header = () => {
   const { user, dispatch } = useContext(UserContext);
@@ -26,17 +27,9 @@ export const Header = () => {
           </AppTitle>
           <LoginName>{user ? user : "Guest"}</LoginName>
           {user ? (
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={handlelogout}
-            >
-              Logout
-            </Button>
+            <OutlinedButton onClick={handlelogout}>Logout</OutlinedButton>
           ) : (
-            <Button color="secondary" variant="contained" onClick={handlelogin}>
-              Login
-            </Button>
+            <OutlinedButton onClick={handlelogin}>Login</OutlinedButton>
           )}
         </StyledToolbar>
       </StyledAppBar>
