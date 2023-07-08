@@ -31,7 +31,7 @@ UserInput.propTypes = {
   type: PropTypes.string,
   register: PropTypes.any,
   label: PropTypes.any,
-  pattern: PropTypes.string,
+  pattern: PropTypes.any,
   autoComplete: PropTypes.string,
 };
 
