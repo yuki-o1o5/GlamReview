@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TopImage from "../../public/moreno-matkovic-kpWUwelRlJM-unsplash.jpg";
+import TopImage from "/hero.jpg";
 
 export const Hero = () => {
   return (
