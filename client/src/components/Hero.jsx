@@ -4,7 +4,7 @@ import TopImage from "/hero.jpg";
 export const Hero = () => {
   return (
     <ImgWrapper>
-      <Img src={TopImage} alt="top image" />
+      <StyledImg src={TopImage} alt="top image" />
       <TextContainer>
         <Title>Welcome to GlamReview</Title>
         <Introduction>
@@ -26,7 +26,7 @@ const ImgWrapper = styled.section`
   }
 `;
 
-const Img = styled.img`
+const StyledImg = styled.img`
   width: 100%;
   object-fit: contain;
   @media (min-width: 1024px) {
