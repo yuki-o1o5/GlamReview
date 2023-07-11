@@ -24,7 +24,7 @@ export const ProductPage = () => {
 
   const fetchProductsDataById = async (productId) => {
     const res = await fetch(
-      `http://makeup-api.herokuapp.com/api/v1/products/${productId}.json`
+      `https://makeup-api.herokuapp.com/api/v1/products/${productId}.json`
     );
     const data = await res.json();
     setProduct(data);
