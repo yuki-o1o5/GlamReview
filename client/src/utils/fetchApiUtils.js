@@ -1,7 +1,7 @@
 export const fetchProductsByBrandName = (brandName) =>
   new Promise((resolve, reject) => {
     fetch(
-      `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${brandName}`
+      `https://makeup-api.herokuapp.com/api/v1/products.json?brand=${brandName}`
     )
       .then((response) => response.json())
       .then((result) => resolve(result))
