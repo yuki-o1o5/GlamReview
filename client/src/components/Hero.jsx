@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TopImage from "../assets/moreno-matkovic-kpWUwelRlJM-unsplash.jpg";
+import TopImage from "../../public/moreno-matkovic-kpWUwelRlJM-unsplash.jpg";
 
 export const Hero = () => {
   return (
