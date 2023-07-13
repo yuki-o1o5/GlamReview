@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TopImage from "/image/hero.jpg";
+import TopImage from "public/hero.jpg";
 
 export const Hero = () => {
   return (
