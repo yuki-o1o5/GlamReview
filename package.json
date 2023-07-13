@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm run dev --prefix client",
     "server": "nodemon index",
-    "dev": "npm-run-all --parallel server client"
+    "dev": "npm-run-all --parallel server client",
+    "start":"node index"
   },
   "keywords": [],
   "author": "",
