@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     // outDir: "build"
     rollupOptions: {
-      external: ["public/hero.jpg"],
+      external: ["/public/hero.jpg"],
     },
   },
   resolve: {
